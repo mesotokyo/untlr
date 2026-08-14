@@ -55,13 +55,13 @@ def _proc_arguments_func(name: str, value: str, args: list[str]) -> str:
         return value.format_map(param)
     return value
 
-def render(vars: dict[str, Any] = {}) -> str:
+def render(template: str, vars: dict[str, Any] = {}) -> str:
     # 1. convert template to Jinja format
-    with open(_template_file, "rt", encoding="utf8") as fp:
-        tmpl = fp.read()
+    #with open(_template_file, "rt", encoding="utf8") as fp:
+    #    tmpl = fp.read()
 
     parser = TumblrThemeParser()
-    parser.convert(tmpl)
+    parser.convert(template)
 
     # 2. set Jinja format template and create object
     tmpl = parser.get_result()
