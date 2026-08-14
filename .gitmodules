@@ -1,0 +1,6 @@
+[submodule "depends/jinja-importprops"]
+	path = depends/jinja-importprops
+	url = https://github.com/hylom/jinja-importprops
+[submodule "depends/npf-renderer"]
+	path = depends/npf-renderer
+	url = https://github.com/syeopite/npf-renderer
