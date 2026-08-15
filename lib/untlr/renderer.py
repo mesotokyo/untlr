@@ -4,14 +4,18 @@ import os.path
 from typing import Any
 import json
 import urllib.parse
+import logging
+from pathlib import Path
 
-from jinja2 import Environment, DictLoader
-from .tumblr_theme_parser import TumblrThemeParser
-
+from jinja2 import Environment, DictLoader, FileSystemLoader
 from jinja_importprops import ImportPropsExtension
 
-_template_file = "theme.html"
-_templates = { "/": "" }
+from .tumblr_theme_parser import TumblrThemeParser
+from .sass_loader import compile_sass
+
+logger = logging.getLogger(__name__)
+
+_templates = { "index": "" }
 _jinja_env = Environment(
     loader = DictLoader(_templates),
     extensions = [ImportPropsExtension],
@@ -55,11 +59,29 @@ def _proc_arguments_func(name: str, value: str, args: list[str]) -> str:
         return value.format_map(param)
     return value
 
-def render(template: str, vars: dict[str, Any] = {}) -> str:
-    # 1. convert template to Jinja format
-    #with open(_template_file, "rt", encoding="utf8") as fp:
-    #    tmpl = fp.read()
+def load_template(config: dict[str, Any]) -> str:
+    template = ""
+    base_dir = Path(".")
+    if "theme_file" in config:
+        with open(config["theme_file"], "rt", encoding="utf8") as fp:
+            template = fp.read()
+    elif "theme_dir" in config:
+        base_dir = Path(config["theme_dir"])
+        pre_env = Environment(
+            loader = FileSystemLoader(config["theme_dir"]),
+        )
+        tmpl = pre_env.get_template("index.html")
+        args = {
+            "include_sass": lambda x:compile_sass(config, (base_dir / x))
+        }
+        template = tmpl.render(**args)
+    return template
 
+def render(config: dict[str, Any], vars: dict[str, Any] = {}) -> str:
+    # 1. convert template to Jinja format
+    template = load_template(config)
+    logger.debug(template)
+    
     parser = TumblrThemeParser()
     parser.convert(template)
 
@@ -68,9 +90,9 @@ def render(template: str, vars: dict[str, Any] = {}) -> str:
 
     # 2.1. inject some code to template
     tmpl = tmpl.replace("<head>", "<head>{{ _head_prepend_ }}")
-    
-    _templates["/"] = tmpl
-    template = _jinja_env.get_template("/")
+    #_templates["index"] = tmpl
+    #template = _jinja_env.get_template("index")
+    template = _jinja_env.from_string(tmpl)
 
     # 3. prepare variables
     custom_vars = parser.get_custom_vars()
@@ -78,7 +100,7 @@ def render(template: str, vars: dict[str, Any] = {}) -> str:
     tmpl_args: dict[str, Any] = {}
     tmpl_args.update(custom_vars)
     tmpl_args.update(vars)
-    #print(json.dumps(tmpl_args, indent=2, ensure_ascii=False))
+    logger.debug(json.dumps(tmpl_args, indent=2, ensure_ascii=False))
 
     # 4. add some utility funcs
     tmpl_args["localize"] = _localize_func
@@ -88,7 +110,3 @@ def render(template: str, vars: dict[str, Any] = {}) -> str:
     html = template.render(**tmpl_args)
     return html
 
-if __name__ == "__main__":
-
-    t = render()
-    print(t)
