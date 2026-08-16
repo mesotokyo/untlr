@@ -17,6 +17,11 @@ import livereload
                 
 logger = logging.getLogger("untlr_server")
 
+"""create custom livereload.Server class to suppress redundant log message"""
+class CustomLiveReloadServer(livereload.Server):
+    def _setup_logging(self):
+        pass
+
 class Arguments(argparse.Namespace):
     theme_file: Path | None
     config: Path
@@ -51,7 +56,8 @@ def start_live_server(config: dict[str, Any]):
         ignore_re.append(re.compile(t))
 
     ServerApp.config.update(config)
-    server = livereload.Server(ServerApp)
+    #server = livereload.Server(ServerApp)
+    server = CustomLiveReloadServer(ServerApp)
     if "theme_file" in config:
         server.watch(config["theme_file"])
     if "theme_dir" in config:
@@ -66,7 +72,6 @@ def start_server(config: dict[str, Any]):
     httpd = http.server.HTTPServer(listen, TestServer)
     logger.info(f"start server on {listen}")
     httpd.serve_forever()
-
 
 def main():
     parser = get_parser()
