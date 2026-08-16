@@ -13,6 +13,7 @@ sys.path.append(os.path.abspath(os.path.join("depends", "jinja-importprops", "sr
 sys.path.append(os.path.abspath(os.path.join("depends", "npf-renderer", "src")))
 
 from untlr.server import TestServer, ServerApp
+from untlr.renderer import pre_render
 import livereload
                 
 logger = logging.getLogger("untlr_server")
@@ -40,6 +41,10 @@ def get_parser() -> argparse.ArgumentParser:
                         help="config file")
     parser.add_argument("--debug",
                         action="store_true")
+    parser.add_argument("--render",
+                        metavar="OUTPUT_FILE",
+                        type=Path,
+                        default=None)
     return parser
 
 def check_excluded(filename: str, excludes: list[re.Pattern]) -> bool:
@@ -73,6 +78,11 @@ def start_server(config: dict[str, Any]):
     logger.info(f"start server on {listen}")
     httpd.serve_forever()
 
+def render(config: dict[str, Any], output_path):
+    with output_path.open("wt", encoding="utf-8") as fp:
+        output = pre_render(config)
+        fp.write(output)
+    
 def main():
     parser = get_parser()
     args = parser.parse_args(namespace=Arguments())
@@ -101,6 +111,10 @@ def main():
         logger.critical("theme file or directory not given or invalid file or directory is given")
         sys.exit(-1)
 
+    if args.render:
+        render(config, args.render)
+        sys.exit(0)
+        
     if config.get("watch", {}).get("enabled", False):
         start_live_server(config)
     else:

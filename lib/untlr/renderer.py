@@ -59,7 +59,7 @@ def _proc_arguments_func(name: str, value: str, args: list[str]) -> str:
         return value.format_map(param)
     return value
 
-def load_template(config: dict[str, Any]) -> str:
+def pre_render(config: dict[str, Any]) -> str:
     template = ""
     base_dir = Path(".")
     if "theme_file" in config:
@@ -79,7 +79,7 @@ def load_template(config: dict[str, Any]) -> str:
 
 def render(config: dict[str, Any], vars: dict[str, Any] = {}) -> str:
     # 1. convert template to Jinja format
-    template = load_template(config)
+    template = pre_render(config)
     logger.debug(template)
     
     parser = TumblrThemeParser()
