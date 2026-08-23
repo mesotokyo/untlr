@@ -7,7 +7,7 @@ import math
 from urllib.error import HTTPError
 logger = logging.getLogger(__name__)
 
-from .posts_response import PostsResponse, Post
+from .posts_response import PostsResponse
 from .tumblr_theme_parser import escape_identifier
 from .tumblr_client import TumblrClient
 
@@ -142,7 +142,7 @@ class VariableManager:
         if path == "/":
             self._generate_for_index(vars)
             self._set_default_values(vars)
-            self._load_additional_content(vars, "index")
+            self._load_additional_content(vars, "page")
 
         if path.startswith("/page/"):
             m = re.match(r"/page/(\d+)/?", path)
@@ -150,7 +150,7 @@ class VariableManager:
                 page_num = m.group(1)
                 self._generate_for_page(page_num, vars)
             self._set_default_values(vars)
-            self._load_additional_content(vars, "post")
+            self._load_additional_content(vars, "page")
             
         if path.startswith("/post/"):
             m = re.match(r"/post/(\d+)/?", path)
@@ -184,7 +184,7 @@ class VariableManager:
 
         vars.update(pr.blog.to_variables())
         d = {
-            "Posts": [p.to_variables("index") for p in pr.posts],
+            "Posts": [p.to_variables("page") for p in pr.posts],
             "IndexPage": True,
             "Pagination": True,
             "NextPage":  f"/page/{page+1}",

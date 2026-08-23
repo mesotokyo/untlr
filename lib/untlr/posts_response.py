@@ -15,7 +15,7 @@ import sys
 import os
 
 #from npf_renderer import format_npf
-from npf_extendable_formatter import format_npf
+from npf_extendable_formatter import format_npf, FormatOption
 
 from .date_parser import parse_timestamp
 
@@ -208,16 +208,25 @@ class Post:
         vars = self._parse_text_post(format)
         c = self.raw_data["content"]
         l = self.raw_data["layout"]
-        error, html = format_npf(c, l)
+
+        option = FormatOption.IGNORE_TITLE
+        if format == "page":
+            option = option | FormatOption.HARD_TRUNCATE
+            error, html = format_npf(c, l, truncate=True, option=option)
+        elif format == "post":
+            error, html = format_npf(c, l, truncate=False, option=option)
+        else:
+            error, html = format_npf(c, l, truncate=False, option=option)
+
         body: str = html
         if error:
             print(error)
             return vars
 
-        if format == "index":
+        if format == "page":
             # truncate <details> block
-            i = body.find("<details ")
-            body = body[0:i] + "</div>"
+            #i = body.find("<details ")
+            #body = body[0:i] + "</div>"
 
             # remove `loading="lazy"` attribute
             body = body.replace('''loading="lazy"''', "")
@@ -234,7 +243,10 @@ class Post:
         #vars["NPF"] = self.raw_data.get("content")
         vars["Body"] = body
         vars["PostType"] = "text"
-        vars["Title"] = ""
+        try:
+            vars["Title"] = self.raw_data["summary"]
+        except KeyError:
+            vars["Title"] = ""
         
         return vars
 
@@ -242,11 +254,11 @@ class Post:
         """Convert Blog information to variables for renderer"""
         vars: dict[str, Any] = {}
         if self.raw_data.get("type") == "text":
-            vars = self._parse_text_post(format)
-        elif self.raw_data.get("type") == "blocks":
-            vars = self._parse_npf_post(format)
+            return self._parse_text_post(format)
+        if self.raw_data.get("type") == "blocks":
+                return self._parse_npf_post(format)
+        return {}
 
-        return vars
 
     def _gen_reblog_btn(self) -> str:
         post_id = self.raw_data.get("id_string")
