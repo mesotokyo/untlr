@@ -14,7 +14,8 @@ from urllib.parse import quote
 import sys
 import os
 
-import npf_renderer
+#from npf_renderer import format_npf
+from npf_extendable_formatter import format_npf
 
 from .date_parser import parse_timestamp
 
@@ -207,7 +208,7 @@ class Post:
         vars = self._parse_text_post(format)
         c = self.raw_data["content"]
         l = self.raw_data["layout"]
-        error, html = npf_renderer.format_npf(c, l)
+        error, html = format_npf(c, l)
         body: str = html
         if error:
             print(error)

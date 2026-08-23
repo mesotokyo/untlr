@@ -12,6 +12,7 @@ from wsgiref.simple_server import make_server
 sys.path.append(os.path.abspath("lib"))
 sys.path.append(os.path.abspath(os.path.join("depends", "jinja-importprops", "src")))
 sys.path.append(os.path.abspath(os.path.join("depends", "npf-renderer", "src")))
+sys.path.append(os.path.abspath(os.path.join("depends", "npf-extendable-formatter", "src")))
 
 from untlr.server import ServerApp
 from untlr.renderer import pre_render
