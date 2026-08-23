@@ -64,29 +64,4 @@ class ServerApp:
         self.start_response(status, response_headers)
         yield html
 
-class TestServer(http.server.BaseHTTPRequestHandler):
-    config: ClassVar[dict[str, Any]] = {}
-    
-    def do_GET(self):
-        """Serve a GET request."""
-
-        # if self.path != "/":
-        #     self.send_response(404)
-        #     self.end_headers()
-        #     return
-
-        vm = VariableManager(self.config)
-        vars = vm.generate_for_path(self.path)
-        if "Posts" in vars:
-            logger.debug(json.dumps(vars["Posts"][0], indent=2, ensure_ascii=False))
-
-        html = render(self.config, vars).encode("utf-8")
-        self.send_response(200)
-        self.send_header("Context-Type", "text/html")
-        self.send_header("Content-Length", str(len(html)))
-        self.send_header("Last-Modified", self.date_time_string())
-        self.end_headers()
-        self.wfile.write(html)
-
-    
 

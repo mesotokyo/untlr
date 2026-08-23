@@ -7,12 +7,13 @@ import argparse
 from pathlib import Path
 import logging
 from typing import Any
+from wsgiref.simple_server import make_server
 
 sys.path.append(os.path.abspath("lib"))
 sys.path.append(os.path.abspath(os.path.join("depends", "jinja-importprops", "src")))
 sys.path.append(os.path.abspath(os.path.join("depends", "npf-renderer", "src")))
 
-from untlr.server import TestServer, ServerApp
+from untlr.server import ServerApp
 from untlr.renderer import pre_render
 import livereload
                 
@@ -61,7 +62,6 @@ def start_live_server(config: dict[str, Any]):
         ignore_re.append(re.compile(t))
 
     ServerApp.config.update(config)
-    #server = livereload.Server(ServerApp)
     server = CustomLiveReloadServer(ServerApp)
     if "theme_file" in config:
         server.watch(config["theme_file"])
@@ -72,11 +72,12 @@ def start_live_server(config: dict[str, Any]):
     server.serve(port=port, host=host)
 
 def start_server(config: dict[str, Any]):
-    TestServer.config.update(config)
-    listen = (config["system"]["listen"], config["system"]["port"])
-    httpd = http.server.HTTPServer(listen, TestServer)
-    logger.info(f"start server on {listen}")
-    httpd.serve_forever()
+    ServerApp.config.update(config)
+    listen = config["system"]["listen"]
+    port = config["system"]["port"]
+    logger.info(f"start server on {listen}:{port}")
+    with make_server(listen, port, ServerApp) as httpd:
+        httpd.serve_forever()
 
 def render(config: dict[str, Any], output_path):
     with output_path.open("wt", encoding="utf-8") as fp:
