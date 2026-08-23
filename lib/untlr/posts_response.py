@@ -170,6 +170,9 @@ class Blog:
         """Convert Blog information to variables for renderer"""
         return _map_props(self.raw_data, _BLOG_PROPERTY_MAPPING)
 
+    def get(self, key: str, default: Any = None) -> Any:
+        return self.raw_data.get(key, default)
+
 class Post:
     """Represents `post` information"""
     raw_data: dict[str, Any]

@@ -4,12 +4,13 @@ import tomllib
 import logging
 import json
 from http import HTTPStatus
+from urllib.error import HTTPError
 from wsgiref.types import WSGIEnvironment, StartResponse
 import time
 import email.utils
 
 from .renderer import render
-from .variable_manager import VariableManager
+from .variable_manager import NotFoundError, VariableManager
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,19 @@ class ServerApp:
             return
         
         vm = VariableManager(self.config)
-        vars = vm.generate_for_path(path)
+        try:
+            vars = vm.generate_for_path(path)
+        except HTTPError as err:
+            yield self.send(HTTPStatus.NOT_FOUND)
+            return
+        except NotFoundError as err:
+            yield self.send(HTTPStatus.NOT_FOUND)
+            return
+        except BaseException as err:
+            logger.error(f"{err.__class__.__name__}:{err}")
+            yield self.send(HTTPStatus.NOT_FOUND)
+            return
+            
         if "Posts" in vars:
             logger.debug(json.dumps(vars["Posts"][0], indent=2, ensure_ascii=False))
 

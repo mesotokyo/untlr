@@ -3,11 +3,16 @@ import re
 import json
 from pathlib import Path
 import logging
+import math
+from urllib.error import HTTPError
 logger = logging.getLogger(__name__)
 
 from .posts_response import PostsResponse, Post
 from .tumblr_theme_parser import escape_identifier
 from .tumblr_client import TumblrClient
+
+class NotFoundError(Exception):
+    pass
 
 class CachedClient:
     cache_enabled: bool
@@ -166,12 +171,16 @@ class VariableManager:
         except ValueError:
             page = 0
         if page < 1:
-            logger.error(f"invalid page number: {page_num}")
-            return 
+            msg = f"invalid page number: {page_num}"
+            logger.error(msg)
+            raise NotFoundError(msg)
 
         offset = self.post_per_page * (page-1)
         data = self.client.get_posts(offset, self.post_per_page)
         pr = PostsResponse(data)
+        # posts
+        posts = pr.blog.get("posts")
+        
 
         vars.update(pr.blog.to_variables())
         d = {
@@ -180,9 +189,9 @@ class VariableManager:
             "Pagination": True,
             "NextPage":  f"/page/{page+1}",
             "CurrentPage": page,
-            "TotalPages": "28",
+            "TotalPages": math.ceil(posts / self.post_per_page),
         }
-        if page > 2:
+        if page > 1:
             d["PreviousPage"] = f"/page/{page-1}"
 
         vars.update(d)
@@ -194,11 +203,13 @@ class VariableManager:
             the_id = 0
 
         if the_id == 0:
-            logger.error(f"invalid page number: {post_id}")
-            return 
+            msg = f"invalid page ID: {post_id}"
+            logger.error(msg)
+            raise NotFoundError(msg)
 
         c = TumblrClient(self.config)
         data = self.client.get_post(the_id)
+        
         pr = PostsResponse(data)
         vars["Posts"] = [pr.posts[0].to_variables("post")]
         vars["IndexPage"] = False
