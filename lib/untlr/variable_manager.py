@@ -104,30 +104,42 @@ class VariableManager:
     config: dict[str, Any]
     post_per_page: int
     client: CachedClient
+    _partials: dict[str, dict[str, str]]
     
     def __init__(self, config: dict[str, Any]):
         self.config = config
         self.post_per_page = config["system"].get("post_per_page", 10)
         self.client = CachedClient(config)
+        self._load_partials()
 
-    def _load_additional_content(self, vars: dict[str, Any], page_type: str):
-        section = f"{page_type}_page"
-        if not section in self.config:
-            return
+    def _load_partials(self):
+        self._partials = {}
+        try:
+            base_dir = Path(self.config["theme_dir"])
+        except KeyError:
+            base_dir = Path(".")
 
-        cfg = self.config[section]
-
-        for c_type in ("head_prepend",):
+        for page_type in ("index", "post"):
+            logger.info(f"find partials for {page_type}...")
+            self._partials[page_type] = {}
+            section = f"{page_type}_page"
             try:
-                fn = cfg[c_type]
+                conf = self.config[section]
             except KeyError:
                 continue
-
-            with open(fn, encoding="utf-8") as fp:
-                content = fp.read()
-
-            key = f"_{c_type}_"
-            vars[key]  = content
+            for tag in ("html", "head", "body"):
+                for k in (f"before_{tag}", f"after_{tag}", f"{tag}_start", f"{tag}_end"):
+                    try:
+                        fname = base_dir / str(conf[k])
+                    except KeyError:
+                        continue
+                    try:
+                        with fname.open(encoding="utf-8") as fp:
+                            logger.info(f"partial {fname} for {k} found")
+                            content = fp.read()
+                    except IOError:
+                        continue
+                    self._partials[page_type][k] = f"<!-- {k} -->\n{content}<!-- end of {k} -->\n"
 
     def _set_default_values(self, vars: dict[str, Any]):
         # import default values with escaping
@@ -135,7 +147,20 @@ class VariableManager:
         for k in def_vars:
             key = escape_identifier(k)
             vars[key]  = def_vars[k]
-            
+
+    def _load_additional_content(self, vars: dict[str, Any], page_type: str):
+        if page_type == "page":
+            t = "index"
+        else:
+            t = page_type
+        try:
+            d = self._partials[t]
+        except KeyError:
+            logger.info(f"partials for {t} do not found")
+            return
+        logger.debug(f"used partials: {d.keys()}")
+        vars.update(d)
+        
     def generate_for_path(self, path: str) -> dict[str, Any]:
         vars: dict[str, Any] = {}
 
@@ -181,7 +206,6 @@ class VariableManager:
         # posts
         posts = pr.blog.get("posts")
         
-
         vars.update(pr.blog.to_variables())
         d = {
             "Posts": [p.to_variables("page") for p in pr.posts],
@@ -190,6 +214,7 @@ class VariableManager:
             "NextPage":  f"/page/{page+1}",
             "CurrentPage": page,
             "TotalPages": math.ceil(posts / self.post_per_page),
+            #"RelatedPosts": [],
         }
         if page > 1:
             d["PreviousPage"] = f"/page/{page-1}"

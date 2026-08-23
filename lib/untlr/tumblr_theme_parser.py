@@ -6,6 +6,8 @@ import re
 import sys
 from html.parser import HTMLParser
 from typing import Any
+import logging
+logger = logging.getLogger(__name__)
 
 from .keywords import KW_ITERATOR, KW_VARS, KW_NEGATIVE_CONDITIONS
 
@@ -227,13 +229,38 @@ class TumblrThemeParser(HTMLParser):
             else:
                 attr_list.append(f'{name}="{value}"')
         attrs_str = " ".join(attr_list)
+
+        # insert tags to insert special codes to specific position
+        before = ""
+        after = ""
+        if tag in ("html", "head", "body"):
+            before = f"before_{tag}"
+            after = f"{tag}_start"
+            
+        if before:
+            self._output.append(f"{{{{- {before} -}}}}")
         self._output.append(f'<{attrs_str}>')
+        if after:
+            self._output.append(f"{{{{- {after} -}}}}")
 
     def handle_startendtag(self, tag: str, attrs: list[tuple]):
         self.handle_starttag(tag, attrs)
 
     def handle_endtag(self, tag: str):
+        # insert tags to insert special codes to specific position
+        before = ""
+        after = ""
+        before = ""
+        after = ""
+        if tag in ("html", "head", "body"):
+            before = f"{tag}_end"
+            after = f"after_{tag}"
+
+        if before:
+            self._output.append(f"{{{{- {before} -}}}}")
         self._output.append(f'</{tag}>')
+        if after:
+            self._output.append(f"{{{{- {after} -}}}}")
 
     def handle_data(self, data: str):
         self._output.append(self._replace_brace(data))
@@ -245,7 +272,36 @@ class TumblrThemeParser(HTMLParser):
         self.feed(input_html)
         self.close()
         self._result = self._replace_brace(input_html)
-    
+
+    def insert_partials(self):
+        # insert variables to render special content before specified tags
+        html_rex = re.compile(r"""<("[^"]*"|\'[^\']*\'|[^\'">])*>""", re.S)
+        tag_rex = re.compile(r"""[a-zA-Z]+""")
+
+        def _replacer(m: re.Match) -> str:
+            tag: str = m.group(0)
+            tag_body = tag.strip("< ")
+            tag_is_end = tag_body.startswith("/")
+            if tag_is_end:
+                tag_body = tag_body[1:]
+            try:
+                tag_name = tag_rex.match(tag_body).group(0)
+            except AttributeError:
+                return m.group(0)
+
+            if tag_name in ("html", "head", "body"):
+                if tag_is_end:
+                    t =f"{{{{- {tag_name}_end -}}}}\n{m.group(0)}\n{{{{- after_{tag_name} }}}}"
+                    return t
+                else:
+                    t =f"{{{{- before_{tag_name} -}}}}\n{m.group(0)}\n{{{{- {tag_name}_start }}}}"
+                    return t
+                
+            return m.group(0)
+        
+        t = html_rex.sub(_replacer, self._result)
+        self._result = t
+        
     def get_result(self) -> str:
         return self._result
 
@@ -254,12 +310,13 @@ def convert_tumblr_to_jinja(input_html: str, log: bool = False) -> str:
     #parser.feed(input_html)
     #parser.close()
     parser.convert(input_html)
+    log = True
     if log:
-        print("---", file=sys.stderr)
+        logger.info("---")
         for v in parser._custom_blocks:
-            print(f"{v}: {parser._custom_blocks[v]}", file=sys.stderr)
+            logger.info(f"{v}: {parser._custom_blocks[v]}")
         for v in parser._custom_vars:
-            print(f"{v}: {parser._custom_vars[v]}", file=sys.stderr)
+            logger.info(f"{v}: {parser._custom_vars[v]}")
             
     return parser.get_result()
 

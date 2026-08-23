@@ -46,6 +46,7 @@ def _transform_func(fmt: str, text: str) -> str:
         except ValueError:
             return default
         return ", ".join(rgb)
+    return ""
 
 def _proc_arguments_func(name: str, value: str, args: list[str]) -> str:
     # parse args
@@ -84,12 +85,14 @@ def render(config: dict[str, Any], vars: dict[str, Any] = {}) -> str:
     
     parser = TumblrThemeParser()
     parser.convert(template)
+    parser.insert_partials()
 
     # 2. set Jinja format template and create object
     tmpl = parser.get_result()
+    #logger.debug(tmpl)
 
     # 2.1. inject some code to template
-    tmpl = tmpl.replace("<head>", "<head>{{ _head_prepend_ }}")
+    #tmpl = tmpl.replace("<head>", "<head>{{ _head_prepend_ }}")
     #_templates["index"] = tmpl
     #template = _jinja_env.get_template("index")
     template = _jinja_env.from_string(tmpl)
