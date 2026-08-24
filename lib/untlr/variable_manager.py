@@ -105,12 +105,17 @@ class VariableManager:
     post_per_page: int
     client: CachedClient
     _partials: dict[str, dict[str, str]]
+    renderer: str
     
     def __init__(self, config: dict[str, Any]):
         self.config = config
         self.post_per_page = config["system"].get("post_per_page", 10)
         self.client = CachedClient(config)
         self._load_partials()
+        try:
+            self.renderer = self.config["system"]["renderer"]
+        except KeyError:
+            self.renderer = ""
 
     def _load_partials(self):
         self._partials = {}
@@ -202,13 +207,13 @@ class VariableManager:
 
         offset = self.post_per_page * (page-1)
         data = self.client.get_posts(offset, self.post_per_page)
-        pr = PostsResponse(data)
+        pr = PostsResponse(data, renderer=self.renderer)
         # posts
         posts = pr.blog.get("posts")
         
         vars.update(pr.blog.to_variables())
         d = {
-            "Posts": [p.to_variables("page") for p in pr.posts],
+            "Posts": [p.to_variables("page", renderer=self.renderer) for p in pr.posts],
             "IndexPage": True,
             "Pagination": True,
             "NextPage":  f"/page/{page+1}",
@@ -235,7 +240,7 @@ class VariableManager:
         c = TumblrClient(self.config)
         data = self.client.get_post(the_id)
         
-        pr = PostsResponse(data)
-        vars["Posts"] = [pr.posts[0].to_variables("post")]
+        pr = PostsResponse(data, renderer=self.renderer)
+        vars["Posts"] = [pr.posts[0].to_variables("post", renderer=self.renderer)]
         vars["IndexPage"] = False
     

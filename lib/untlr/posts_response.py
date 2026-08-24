@@ -13,9 +13,12 @@ from datetime import datetime, UTC
 from urllib.parse import quote
 import sys
 import os
+import logging
+logger = logging.getLogger(__name__)
 
 #from npf_renderer import format_npf
-from npf_extendable_formatter import format_npf, FormatOption
+#from npf_extendable_formatter import format_npf, FormatOption
+from .render_npf import NPFRenderError, render_npf
 
 from .date_parser import parse_timestamp
 
@@ -204,23 +207,12 @@ class Post:
         vars["Text"] = True
         return vars
 
-    def _parse_npf_post(self, format: str) -> dict[str, Any]:
+    def _parse_npf_post(self, format: str, renderer: str) -> dict[str, Any]:
         vars = self._parse_text_post(format)
-        c = self.raw_data["content"]
-        l = self.raw_data["layout"]
-
-        option = FormatOption.IGNORE_TITLE
-        if format == "page":
-            option = option | FormatOption.HARD_TRUNCATE
-            error, html = format_npf(c, l, truncate=True, option=option)
-        elif format == "post":
-            error, html = format_npf(c, l, truncate=False, option=option)
-        else:
-            error, html = format_npf(c, l, truncate=False, option=option)
-
-        body: str = html
-        if error:
-            print(error)
+        try:
+            body = render_npf(self.raw_data, format, renderer)
+        except NPFRenderError as err:
+            logger.error(err)
             return vars
 
         if format == "page":
@@ -250,13 +242,13 @@ class Post:
         
         return vars
 
-    def to_variables(self, format: str = "") -> dict[str, Any]:
+    def to_variables(self, format: str = "", renderer: str = "") -> dict[str, Any]:
         """Convert Blog information to variables for renderer"""
         vars: dict[str, Any] = {}
         if self.raw_data.get("type") == "text":
             return self._parse_text_post(format)
         if self.raw_data.get("type") == "blocks":
-                return self._parse_npf_post(format)
+                return self._parse_npf_post(format, renderer)
         return {}
 
 
@@ -290,10 +282,12 @@ class PostsResponse:
     raw_data: dict[str, Any]
     blog: Blog
     posts: list[Post]
+    renderer: str
     
-    def __init__(self, d: dict[str, Any]):
+    def __init__(self, d: dict[str, Any], renderer: str = ""):
         self.raw_data = d
         self._from_dict(d)
+        self.renderer = renderer
 
     def _from_dict(self, d: dict[str, Any]):
         resp = d.get("response", {})
