@@ -59,7 +59,8 @@ class ServerApp:
             yield self.send(HTTPStatus.NOT_FOUND)
             return
         except BaseException as err:
-            logger.error(f"{err.__class__.__name__}:{err}")
+            #logger.error(f"{err.__class__.__name__}:{err}")
+            logger.exception(err)
             yield self.send(HTTPStatus.NOT_FOUND)
             return
             
