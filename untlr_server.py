@@ -18,7 +18,7 @@ sys.path.append(os.path.abspath(os.path.join("depends", "npwr", "src")))
 from untlr.server import ServerApp
 from untlr.renderer import pre_render
 import livereload
-                
+
 logger = logging.getLogger("untlr_server")
 
 """create custom livereload.Server class to suppress redundant log message"""
@@ -85,23 +85,33 @@ def render(config: dict[str, Any], output_path):
     with output_path.open("wt", encoding="utf-8") as fp:
         output = pre_render(config)
         fp.write(output)
-    
+
 def main():
     parser = get_parser()
     args = parser.parse_args(namespace=Arguments())
     
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
 
     # load config file
     try:
         with open(args.config, "rb") as fp:
             config = tomllib.load(fp)
     except IOError:
-        logger.critical("no config file given")
+        print("config file does not exist", file=sys.stderr)
         sys.exit(-1)
+
+    if not args.debug:
+        try:
+            log_level = config["system"]["log_level"]
+        except KeyError:
+            log_level = "INFO"
+        try:
+            llv = logging.getLevelNamesMapping()[log_level.upper()]
+        except KeyError:
+            print(f"invalid log level: {log_level}", file=sys.stderr)
+            sys.exit(-1)
+        logging.basicConfig(level=llv)
 
     if args.theme_file:
         if args.theme_file.is_file():
