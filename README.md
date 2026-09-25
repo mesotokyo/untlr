@@ -38,6 +38,14 @@ $ python3 untlr_server.py Theme.html
 
 For example, you can get `DataTheme` via [https://github.com/tumblr/DataTheme/](https://github.com/tumblr/DataTheme/).
 
+## Configuration
+
+You need at least the following configuration keys:
+
+ - api.key
+ - blog.id
+
+
 ## License
  
  GPLv3 ( https://www.gnu.org/licenses/gpl-3.0.html )

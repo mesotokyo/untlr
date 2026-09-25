@@ -121,7 +121,7 @@ class VariableManager:
         self._partials = {}
         try:
             base_dir = Path(self.config["theme_dir"])
-        except KeyError:
+        except (KeyError, TypeError):
             base_dir = Path(".")
 
         for page_type in ("index", "post"):

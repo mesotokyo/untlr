@@ -116,6 +116,7 @@ class DefaultValues(TyConf):
 
 class UntlrConfig(TyConf):
     theme_dir: str
+    theme_file: str
     system: SystemConfig
     watch: WatchConfig
     blog: BlogConfig
@@ -127,6 +128,8 @@ class UntlrConfig(TyConf):
     def init(self):
         self.add_key("theme_dir", str, example="theme",
                      help="Directory contains theme files")
+        self.add_key("theme_file", str, example="theme.html",
+                     help="Theme file")
         self.add_key("system", SystemConfig)
         self.add_key("watch", WatchConfig)
         self.add_key("blog", BlogConfig)
