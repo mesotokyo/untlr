@@ -4,3 +4,6 @@
 [submodule "depends/npf-renderer"]
 	path = depends/npf-renderer
 	url = https://github.com/syeopite/npf-renderer
+[submodule "depends/depends"]
+	path = depends/tyconf
+	url = https://github.com/hylom/tyconf
