@@ -42,8 +42,17 @@ For example, you can get `DataTheme` via [https://github.com/tumblr/DataTheme/](
 
 You need at least the following configuration keys:
 
- - api.key
- - blog.id
+ - `api.key`
+ - `blog.id`
+ 
+ ### `api.key`
+`untlr` uses Tumblr API to retrieve blog contents, and API key ("OAuth consumer key") is needed to call these APIs. If you have Tumblr account, you can issue it after registering your "Applications" on [OAuth Applications](https://www.tumblr.com/oauth/apps) page on Tumblr.
+
+### `blog.id`
+
+Give your Tumblr blog domain. For example, when your blog URL is `https://some-domain-name.tumblr.com/`,  set `some-domain-name.tumblr.com`. 
+
+**NOTE**: `untlr` uses public API to retrieve Blog contents, so you can set the blog domain other than you manage to `blog.id`, such as `nihongo.tumblr.com`.
 
 
 ## License
