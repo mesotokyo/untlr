@@ -1,0 +1,2593 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "USB PD（Type-C充電器）で電力を供給できる9Vパワーサプライを作る",
+      "subtype": "heading1"
+    },
+    {
+      "type": "text",
+      "text": "持ち運びやすく、かつ高品質の電力を供給できることを目指してUSBで電力を供給するパワーサプライを作った話です。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 2048,
+          "height": 2048,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s2048x3072/756781a7b5230c3fd7957e45c8aeb20787223983.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 1280,
+          "height": 1280,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s1280x1920/5956466e74090280cbb47726497c428f26a7ffce.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 640,
+          "height": 640,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s640x960/bd7e4bf134e604de71c55250b1b66754aaa1d54c.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 540,
+          "height": 540,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s540x810/3ce76a8c2ffd1b5e9920dd4edc71763488c218e1.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 500,
+          "height": 500,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s500x750/291ef8e79ad1deea788ea36d149cc060f7813a7a.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 400,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s400x600/4f7f58267e63c3a2717abf81d4838bc5a042859c.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 250,
+          "height": 250,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s250x400/c7360a5a18066aca6ca45ed2b4d3f23a3c42a065.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 100,
+          "height": 100,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s100x200/c5460e5e409925f364e33f9e11f4b457b241e224.jpg"
+        },
+        {
+          "media_key": "dbe5b824df81c2a41023a53bf11187a9:abf76e18b89bb71f-9b",
+          "type": "image/jpeg",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/dbe5b824df81c2a41023a53bf11187a9/abf76e18b89bb71f-9b/s75x75_c1/5f8b2517305c0bcc507b490079ab231a154680f3.jpg",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "17353c",
+        "c1": "785f3f",
+        "c2": "725a46",
+        "c3": "9a896a",
+        "c4": "235054"
+      },
+      "exif": {
+        "Time": 1782088891,
+        "FocalLength": 5,
+        "FocalLength35mmEquiv": 5,
+        "Aperture": 1.6,
+        "ExposureTime": 0.04,
+        "ISO": 500,
+        "CameraMake": "Apple",
+        "CameraModel": "iPhone 13 mini",
+        "Lens": "5mm"
+      }
+    },
+    {
+      "type": "text",
+      "text": "現代のエフェクター用パワーサプライでは、本体とは別にACアダプタを必要とするタイプが一般的ですが、ものによってはACアダプタのサイズがパワーサプライ本体と同じくらいのサイズのものあるようです。大電力を扱うためにはサイズが大きくなるのは仕方がないような気もするのですが、一方で最近のスマートフォン向けのACアダプタは1辺が3、4cm程度という小さいサイズなのに20Wの出力が可能だったりします。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 2048,
+          "height": 2048,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s2048x3072/ac7a10f1b314fbfc86d58b1099a1dde247a34c46.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 1280,
+          "height": 1280,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s1280x1920/225afa08c7f70daa0a2da069b18eca7da03b5fe4.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 640,
+          "height": 640,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s640x960/19199bcef0dd87212e47a32b6188bd7e8438eb59.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 540,
+          "height": 540,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s540x810/60eb50510477c8a263c918d0d5cc9e89846e8ebb.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 500,
+          "height": 500,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s500x750/941b637721fbb477ef8ad1c18de95d2d6040adbc.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 400,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s400x600/57589e8693ac2a8133e72cda3e5a223b69d8e4bf.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 250,
+          "height": 250,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s250x400/b30f94257c49e48bab07082fa72d227d138920ca.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 100,
+          "height": 100,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s100x200/4841f9cc04a2ee578e7566ce3222272414d1d480.jpg"
+        },
+        {
+          "media_key": "a5c7d9374153a073ad323876ba285203:abf76e18b89bb71f-34",
+          "type": "image/jpeg",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/a5c7d9374153a073ad323876ba285203/abf76e18b89bb71f-34/s75x75_c1/656cc9a8a3391a0db1e5756d91cde8c03b70eeac.jpg",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "956f41",
+        "c1": "ae8c65",
+        "c2": "222937",
+        "c3": "6c5131",
+        "c4": "3b2919"
+      },
+      "exif": {
+        "Time": 1782093240,
+        "FocalLength": 5,
+        "FocalLength35mmEquiv": 5,
+        "Aperture": 1.6,
+        "ExposureTime": 0.030303030303030304,
+        "ISO": 500,
+        "CameraMake": "Apple",
+        "CameraModel": "iPhone 13 mini",
+        "Lens": "5mm"
+      }
+    },
+    {
+      "type": "text",
+      "text": "20Wというと、エフェクター向けとして一般的な9Vパワーサプライにおいては単純計算で約2.2Aの出力電流に相当します。これだけの出力があれば、複数のエフェクターに対して十分な電流を流せます。ということで、こういったUSB充電器を電源として使用するパワーサプライを作ってみよう、というのが今回のお話です。"
+    },
+    {
+      "type": "text",
+      "text": "前置き1：USB充電器から12Vを取り出す方法",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "USB充電器にはいくつかのタイプがありますが、今回使用するのはUSB Type-Cタイプのコネクタが付いている、「USB PD」という規格に対応するUSB充電器です。USBは通常5Vの電圧しか出力できないのですが、USB PDに対応するUSB充電器では、9Vや12V、15Vなど、それ以上の電圧を出力することができます。たとえば秋月電子通商で販売されているUSB PD対応の20W ACアダプターでは、「5V=3A; 9V=2.22A; 12V=1.67A」という表記があり、5Vと9V、12Vの出力に対応していることが分かります。",
+      "formatting": [
+        {
+          "type": "link",
+          "start": 164,
+          "end": 198,
+          "url": "https://akizukidenshi.com/catalog/g/g117092/"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "USB PD対応ACアダプタでは、機器に接続すると最初に5Vの電圧を出力し、続いて接続した機器と通信を行って必要な電圧についての情報を受け取り、出力電圧をそれに応じて変更する、という仕組みになっています。通信が必要というと面倒くさそうな印象がありますが、これを自動的にやってくれる「USB PDシンクコントローラー」と呼ばれるICがあり、このICを抵抗器やコンデンサとともにUSB端子に接続するだけで、USB充電器から希望する電圧を受け取れるようになります。"
+    },
+    {
+      "type": "text",
+      "text": "今回作成したパワーサプライでは、はこのUSBシンクコントローラーICを使ってUSB PD充電器から12Vもしくは15Vの電圧を受け取り、それを高効率のスイッチングレギュレータで降圧したあと、リニアレギュレータでノイズの少ない9V電圧を生成する、という方式を採用しています。"
+    },
+    {
+      "type": "text",
+      "text": "前置き2：リニアレギュレータとスイッチングレギュレータ",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "今回のパワーサプライのように安定した一定の電圧を出力するには、「レギュレータ」と呼ばれる回路やICを使用します。現在一般的なレギュレータには「リニアレギュレータ」と「スイッチングレギュレータ」という2種類があり、それぞれ以下のような傾向があります。"
+    },
+    {
+      "type": "text",
+      "text": "リニアレギュレータ：出力電圧に含まれるノイズは小さいが、消費電力が大きい",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "スイッチングレギュレータ：消費電力は小さいが、出力電圧に含まれるノイズが大きい",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "ちなみにここでいうノイズというのは、出力電圧の微小なブレのことを指しています。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 1050,
+          "height": 1122,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s1280x1920/55c76dfd778ea7496f1fc7ac137b7a9636941f1a.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 640,
+          "height": 684,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s640x960/5b2a1a416ac7ce36ed9f5c3639341bd15fdf3fda.png"
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 540,
+          "height": 577,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s540x810/e748e4027919b5565eadf7c637ff37e1cc548541.png"
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 500,
+          "height": 534,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s500x750/8fe25c4f538c5102775ca8e23d06832c6c7352d2.png"
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 400,
+          "height": 427,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s400x600/caa662868839c92bffbb6b70dd99373994102e2b.png"
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 250,
+          "height": 267,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s250x400/fdf04506112a5fe756ffb6de6a227dfd712ec730.png"
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 100,
+          "height": 107,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s100x200/5f1d670d9d56a1dd22d8ecde3338b8f69293e849.png"
+        },
+        {
+          "media_key": "7deee93750f040f617c0437aec8e7442:abf76e18b89bb71f-38",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/7deee93750f040f617c0437aec8e7442/abf76e18b89bb71f-38/s75x75_c1/b0bfc897703dec2ea035b70e8729a1f5d5197bdc.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "ffffff",
+        "c1": "c6c6c6",
+        "c2": "bcbcbc",
+        "c3": "e7e7e7",
+        "c4": "aaaaaa"
+      }
+    },
+    {
+      "type": "text",
+      "text": "リニアレギュレータは出力電圧を監視し、それに応じて入力と出力の間の抵抗値を変化させることで、出力電圧が一定になるよう制御します。たとえば出力電圧が下がったら抵抗を小さくし、逆に出力電圧が上がったら抵抗を大きくするような制御を行います。そのため、リニアレギュレータにおいては出力電圧は入力電圧よりも大きい必要があり、また原理上「（入力電圧－出力電圧）×出力電流」に相当する電力を消費します。たとえば入力電圧が15V、出力電圧が9V、出力電流が1Aの場合、6Wの電力を消費することになります。この消費電力はすべて熱に変わるため、ヒートシンクなどを使って適切に放熱しないとICや回路の温度が上昇し、最悪の場合この熱によってこれらが破損することになります。"
+    },
+    {
+      "type": "text",
+      "text": "一方、スイッチングレギュレータは入力と出力の間に電子的に制御できるスイッチを設置し、このスイッチをとても短い周期でON/OFFすることで出力電圧が一定になるように制御します。具体的には、出力電圧が下がったらONの時間を長くし、逆に出力電圧が上がったらOFFの時間を長くするような制御を行います。スイッチングレギュレータの出力側にはコンデンサが組み込まれており、スイッチをオフにしている間はそこから電力が放出されるので、スイッチがOFFの場合でも電力の出力自体は連続的に行われます。"
+    },
+    {
+      "type": "text",
+      "text": "スイッチングレギュレータはスイッチのON/OFFで出力電圧をコントロールするため消費電力は少ないのですが、スイッチのON/OFFによるノイズが発生します。そのため、オーディオ信号を扱う機器ではノイズが音声信号に影響しないよう、スイッチを制御する周波数をオーディオ信号の周波数（一般的には20～20kHz程度）よりも大幅に高くするといった手法が採用されています。ただ、それでも（特に大電力を取り出そうとすると）ノイズの影響は避けられないため、高品質なパワーサプライではリニアレギュレータとスイッチングレギュレータを組み合わせる構成を採用していることが多いようです。リニアレギュレータは入力電圧と出力電圧の差が小さいほど消費電力が少なくなるので、まずスイッチングレギュレータで可能な限り電圧を下げ、その出力をリニアレギュレータに入力してノイズをカットすることで、小さい消費電力（＝少ない発熱）でノイズの少ない電力を得ることができます。"
+    },
+    {
+      "type": "text",
+      "text": "前置き3：アイソレート出力",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "一般的なリニアレギュレータ回路やスイッチングレギュレータ回路は、入力と出力でGNDが共通になっています。そのため、出力端子1つに対し1つのレギュレータ回路を使用する構成のパワーサプライでも、それぞれの出力端子のGNDは共通、つまりエフェクター用のいわゆる「センターマイナス」であればセンターピンがすべて直結されています。"
+    },
+    {
+      "type": "text",
+      "text": "一方、スイッチングレギュレータではトランスを組み込んだ回路構成にすることで、入力側のGNDと出力側のGNDを切り離した状態にすることも可能です（この構成のスイッチングレギュレータは「絶縁型スイッチングレギュレータ」、もしくは「絶縁型DCDCコンバータ」などと呼ばれる）。このような絶縁型のスイッチングレギュレータを採用して、出力端子それぞれのGND側が電気的につながっていない構成としたパワーサプライは「完全アイソレート」型などと呼ばれています。"
+    },
+    {
+      "type": "text",
+      "text": "今回作成したパワーサプライの回路",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "前置きが長くなりましたが、今回作成したパワーサプライは次のような構成になっています。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 2048,
+          "height": 427,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s2048x3072/9009f06aafb73863e4513dd2efdd497286a9d0ec.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 1280,
+          "height": 267,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s1280x1920/850a56ddc83a2a72593b635037688845f45d09c3.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 640,
+          "height": 133,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s640x960/6be670a5aa3b67997e41ded09b72c0b836b698ae.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 540,
+          "height": 113,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s540x810/151e3e542a5817b2a4109069be8a579238d09ee5.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 500,
+          "height": 104,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s500x750/660565c520bf845babc8dee11b94d50eac65c6d8.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 400,
+          "height": 83,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s400x600/e0b710c204d709af6231dbf0cc70efe0e4181499.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 250,
+          "height": 52,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s250x400/603e9367241c1171bd1ac6713b383d54501e5bd8.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 100,
+          "height": 21,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s100x200/2b6acb240c0fa26227bc03637eaff0bc4c48c682.png"
+        },
+        {
+          "media_key": "9f22acf7d650bd0428c1d15bcbfe7709:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/9f22acf7d650bd0428c1d15bcbfe7709/abf76e18b89bb71f-76/s75x75_c1/e049c1d3ecfee9e4e5d957af92d30954e7415bab.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "ffffff",
+        "c1": "dbdada",
+        "c2": "e6e8ea",
+        "c3": "9fc3e6",
+        "c4": "718aa3"
+      }
+    },
+    {
+      "type": "text",
+      "text": "このパワーサプライはUSB Type-Cコネクタを搭載しており、このコネクタ経由でUSB PD充電器を接続します。コネクタにはUSB PDシンクコントローラICが接続されており、このICがUSB PD充電器に対して12Vもしくは15Vの電圧を出力するよう要求します。USB PD充電器が出力した電圧はまずスイッチングレギュレータに入力されて約10Vに降圧され、続いてその電圧からリニアレギュレータが最終的な出力となる約9Vの電圧を生成します。このスイッチングレギュレータとリニアレギュレータはどちらも大電流を出力できるので、それを有効活用できるよう出力端子を3つ並列に接続します。この3つの端子はプラス側とマイナス側の両方を共有するため、アイソレート型ではない構成となります。"
+    },
+    {
+      "type": "text",
+      "text": "スイッチングレギュレータとは別に、小型の絶縁型スイッチングレギュレータも搭載しており、こちらは約12Vの電圧を出力します。こちらを独立したリニアレギュレータに入力し、最終的な出力となる約9Vの電圧を生成します。こちらの出力端子はプラス側・マイナス側のどちらもほかの出力端子とは独立した、完全アイソレートな出力端子となります。"
+    },
+    {
+      "type": "text",
+      "text": "回路図は次のようになっています。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 2048,
+          "height": 1413,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s2048x3072/916b4db49747695b1d4d657c87e9d6550ce30cb5.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 1280,
+          "height": 883,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s1280x1920/56180e12e15692cf761090a11acd891db267a0d9.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 640,
+          "height": 442,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s640x960/d81cbf36d2a40e765ccd8b69440136147fa28f53.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 540,
+          "height": 373,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s540x810/5af89e904d507239c31af7740802451b52361a86.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 500,
+          "height": 345,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s500x750/2ef02a96fa2d0d1f715ab75d53855324a494831d.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 400,
+          "height": 276,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s400x600/5d8131d8d9d92ba6fc8a79cb96c144b69e6d1db2.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 250,
+          "height": 172,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s250x400/1750fae00a65366facacb5364f4bce87d0398309.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 100,
+          "height": 69,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s100x200/4e71348ee5484ac00f9dcffeb818b8eeadc164c7.png"
+        },
+        {
+          "media_key": "64331ae7c6604217928bb37c1fac5035:abf76e18b89bb71f-8c",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/64331ae7c6604217928bb37c1fac5035/abf76e18b89bb71f-8c/s75x75_c1/0e988edf5bc800534938570cffb2861e5688d70a.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "e9e6dc",
+        "c1": "d4dbd1",
+        "c2": "bebfb4",
+        "c3": "cfb0aa",
+        "c4": "cfaea7"
+      }
+    },
+    {
+      "type": "text",
+      "text": "USB PDシンクコントローラ部",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "今回の回路では、USB PDシンクコントローラーとして秋月電子通商で購入でき、かつ抵抗器だけで電圧を設定できるシンプルな「CH221K」というICを使用しました。",
+      "formatting": [
+        {
+          "type": "link",
+          "start": 61,
+          "end": 67,
+          "url": "https://akizukidenshi.com/catalog/g/g118022/"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "CH221Kは6つの端子がありますが、それぞれを次のように配線します（詳細はデータシートを参照）。"
+    },
+    {
+      "type": "text",
+      "text": "VDD：1uFのコンデンサを介してGNDに接続したうえで、1kΩの抵抗器を介してUSB Type-CコネクタのVBUS（電源）端子に接続",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "GND：回路のGNDに接続",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "CFG：抵抗器を介してVDD端子に接続。この抵抗器の値によって受け取る電圧が決定される",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "CC1：USB Type-CコネクタのCC1端子に接続",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "CC2：USB Type-CコネクタのCC2端子に接続",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "PG：設定した電圧を受け取れている状態（＝「Power Good」）の場合、この端子がGNDに接続された状態になる。そうでない場合、高インピーダンス（＝絶縁状態）になる",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 765,
+          "height": 576,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s1280x1920/1a9da916f5ec8f60d165d1fa4caf74d4b88673c9.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 640,
+          "height": 482,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s640x960/4ab3fb93c46da8b8cdd8370da557829d69aae457.png"
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 540,
+          "height": 407,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s540x810/a2eeb6693017a4c4ae235685554ccf2361f6cc9b.png"
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 500,
+          "height": 376,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s500x750/8903906848e8f45c8f0ac630262f4fe1c752d781.png"
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 400,
+          "height": 301,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s400x600/d3ad5d7d3700da5a4909cf31c09485acaad44452.png"
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 250,
+          "height": 188,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s250x400/2d933fa6d59ec8051b3ed72b6ec09fac87e1b927.png"
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 100,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s100x200/bac478a9f8142c92c0b3ec6d46a3292f97b65674.png"
+        },
+        {
+          "media_key": "ca81307fb02c49920ece416e7eac8b0f:abf76e18b89bb71f-73",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/ca81307fb02c49920ece416e7eac8b0f/abf76e18b89bb71f-73/s75x75_c1/fc5b372e3f187f4706c5ee1e7d109c9814500f12.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "e8e5db",
+        "c1": "b0c4bc",
+        "c2": "ceaca4",
+        "c3": "89aba4",
+        "c4": "d2e37e"
+      }
+    },
+    {
+      "type": "text",
+      "text": "この回路ではCFG端子とVDD端子の間に挟んだ抵抗器の抵抗値で出力電圧（VCCの電圧）が決定されます。たとえば抵抗値が20kΩの場合はVCCが9V、47kΩの場合は12V、100kΩの場合は15Vになるわけですが、すべてのUSB PD充電器がこれらの電圧に対応しているわけではありません。たとえば前述の秋月電子の充電器は5V、9V、12Vのみに対応しているため、CH221K側の回路で15Vを要求するよう設定（＝CFG-VDD間の抵抗値を100kΩに設定）したとしても15Vは出力できず、充電器側はUSBの標準である5Vの出力を行います。逆に、15V出力には対応するが12Vには対応していない、というUSB PD充電器もあります。そのため、今回はスイッチで抵抗値を切り替えることで12Vもしくは15Vのどちらかに対応していれば利用できるようにしています。"
+    },
+    {
+      "type": "text",
+      "text": "また、動作確認用のLEDを2つ設置し（D1とD4）、充電器側が要求した電圧を出力できているかをLEDの点灯状態で判断できるようにしています。D1はUSBから電圧が供給されていれば点灯するLED、D4は要求した電圧を受け取れていない場合（＝Power Goodでない場合）に点灯するLEDになります。つまり、このLEDの点灯状態で下記のように問題の原因がどこにあるかを特定できます。"
+    },
+    {
+      "type": "text",
+      "text": "D1のみが点灯している→正常動作",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "D1とD4の両方が点灯している→USB PD充電器が指定した電圧に対応していない",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "D1とD4のどちらも点灯していない→USB端子から電源が一切供給されていない（＝充電器側もしくはケーブル、端子などに問題がある）",
+      "subtype": "unordered-list-item"
+    },
+    {
+      "type": "text",
+      "text": "スイッチングレギュレータ部とリニアレギュレータ部",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "スイッチングレギュレータ回路では抵抗器やコンデンサだけでなくインダクタ（コイル）も必要です。そのため設計が面倒なのですが、ちょうど秋月電子通商でこれらを組み合わせてモジュール化した「入出力2.5V~15V 最大1.5A 同期整流式昇降圧型スイッチング電源モジュールキット」というものが販売されていました。価格は2,240円（税込）と安くはないのですが、基板サイズは30mm×30mmとコンパクトで、また表面実装部品はすべて実装済みの状態で販売されています。入出力電圧は2.5～15V、出力電流は最大1.5Aとエフェクター用としては十分です。",
+      "formatting": [
+        {
+          "type": "link",
+          "start": 91,
+          "end": 135,
+          "url": "https://akizukidenshi.com/catalog/g/g111212/"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "このモジュールでは半固定抵抗で出力電圧を設定でき、また入力電圧については2.5～15Vの範囲であれば動作します（入力電圧の設定は不要）。そのため、USB Type-Cコネクタから供給される電圧をこのモジュールの入力に（保護用のPTCを介して）直接接続しています。PTCは流れる電流が一定以上になると抵抗値が上がり、最終的に絶縁状態になる素子です。絶縁状態になっても電流が下がって一定時間が経過すればまた電流を流せるようになるため、「リセッタブルヒューズ」とも呼ばれています。"
+    },
+    {
+      "type": "text",
+      "text": "リニアレギュレータとして代表的なものに「3端子レギュレータ」などと呼ばれるものがありますが、出力電圧が9Vの3端子レギュレータは残念ながら選択肢が少ないため、外付け抵抗器で電圧を設定できる可変型のレギュレータを使用することにします。最終的な出力電圧に含まれるノイズはこのリニアレギュレータ部分の回路に左右されるため、できるだけノイズが少ないレギュレータICを探していたところ、「TPS7A4700使用 超ローノイズ・プログラマブル可変電源キット」というのを見つけました。こちらはDIPスイッチで0.1V単位で出力電圧を設定でき、かつ「超低雑音」をうたっています。こちらも基板サイズは30mm×40mmとコンパクトです。",
+      "formatting": [
+        {
+          "type": "link",
+          "start": 189,
+          "end": 222,
+          "url": "https://akizukidenshi.com/catalog/g/g106194/"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "ということで、結局のところレギュレータ部分はキット2つを組み合わせる構成としました。どちらも幅は30mmなので、構成としても奇麗に収まります。"
+    },
+    {
+      "type": "text",
+      "text": "リニアレギュレータの出力端子には前述のようにDCジャックを3つ並列で接続しています。また、動作確認用のLED（およびLED用の抵抗器）も接続しています。TPS7A4700使用 超ローノイズ・プログラマブル可変電源キットの出力電流は最大1.26A（キットとしては1Aと表記されているが、使用しているICの出力は最大1.26A）なので、3つの端子の合計で1.2A程度の出力までは問題なく可能だと思います。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 913,
+          "height": 790,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s1280x1920/b164e462a1f0907b9c3f7e1062fda72681c32414.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 640,
+          "height": 554,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s640x960/d5071729a4ee7fd940d76514c67c085726ce5a64.png"
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 540,
+          "height": 467,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s540x810/f88a31a44e56921c719e3f9d7f6a4f53091b7b2c.png"
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 500,
+          "height": 433,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s500x750/fc0cccff1750508be9efdba5d2bf18aacf44bf3c.png"
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 400,
+          "height": 346,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s400x600/ffca23c8895d01080ae500424bc5421fec98bf31.png"
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 250,
+          "height": 216,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s250x400/fa8270a10b908e93b301a02d272a5c0765a94b72.png"
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 100,
+          "height": 87,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s100x200/67a41dfee5c2fd198381c4f5c3ed782a676ba989.png"
+        },
+        {
+          "media_key": "e9d5c94cfb5f4e5906ca15dd43696f6e:abf76e18b89bb71f-9e",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/e9d5c94cfb5f4e5906ca15dd43696f6e/abf76e18b89bb71f-9e/s75x75_c1/964a37d27366c9897aeecf38a8c0f44c21c32883.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "e9e6dc",
+        "c1": "cfd7ce",
+        "c2": "9db9b1",
+        "c3": "e3dbd1",
+        "c4": "9b9acd"
+      }
+    },
+    {
+      "type": "text",
+      "text": "おまけのリニアレギュレータ",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "リニアレギュレータの出力はスペック上は最大1.26Aですが、スイッチングレギュレータ部の出力は最大1.5Aと若干余裕があります。そのため、リニアレギュレータICをもう1つ追加できるような配線パターンだけ用意しています（上記の回路図のU6）。ケースの反対側にも穴を開けてDCジャックを追加する、といった使い方を想定しています。ただし、現時点では実際の動作は未検証です。"
+    },
+    {
+      "type": "text",
+      "text": "アイソレート電源部",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "20WのUSB Type-C USBアダプタでは、12V出力の場合最大1.67Aの電流を出力できます。上記のリニアレギュレータ部分の出力は最大1.2Aに設定しているので、まだ余裕があります。それを有効活用するため、絶縁型DC/DCコンバータを組み合わせたアイソレート出力も用意しました。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 1053,
+          "height": 895,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s1280x1920/df12fff59d24e7565e08ee85049abcc6627ad841.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 640,
+          "height": 544,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s640x960/fa93fe69d17c77ccd8fed739831ee9865d4f68f4.png"
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 540,
+          "height": 459,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s540x810/4b13237a6f7e00c038ee826f7aedfcc118772900.png"
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 500,
+          "height": 425,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s500x750/80933cbcdf8917f40b75e2da843e879c6f8ec253.png"
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 400,
+          "height": 340,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s400x600/a0f69b250e24aea46212b7dbe8cb841e01998406.png"
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 250,
+          "height": 212,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s250x400/bba0870247d30ed1f9fae405fedaf470209c41f4.png"
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 100,
+          "height": 85,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s100x200/4fbfffc93d2e7ace1afc4aecb52ef602776379fa.png"
+        },
+        {
+          "media_key": "ef26be8fee7912e51416c2fb06ff7ee0:abf76e18b89bb71f-a0",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/ef26be8fee7912e51416c2fb06ff7ee0/abf76e18b89bb71f-a0/s75x75_c1/6794e7ed572141d7d2dbe17da2abec881bd1f63f.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "e8e6db",
+        "c1": "c7b9c0",
+        "c2": "c49b95",
+        "c3": "a19fce",
+        "c4": "b38781"
+      }
+    },
+    {
+      "type": "text",
+      "text": "絶縁型のスイッチングレギュレータはトランスを使用するため比較的コストが高く、サイズも大きめになるのですが、昨今では1～3W程度の低出力のものであればモジュール化された小型のものが容易に入手可能です。一般的なアナログエフェクターであれば小さい出力でも十分なので、今回は3W・12V入出力の絶縁型スイッチングレギュレータを使用しました。また、これと組み合わせるリニアレギュレータには古くからあるICの「LM723」（正確にはその互換ICのNJM723）を使用しています。LM723は外付けの抵抗やコンデンサなどを必要としますが、ノイズが少なく、電流制御用のトランジスタを外部に接続することで大きな電流にも対応できるというICです。"
+    },
+    {
+      "type": "text",
+      "text": "LM723周辺の回路はデータシートに掲載されているものとほぼ同じですが、出力電圧を約9.0/9.3/9.6Vの3種類から選択できるよう、抵抗器の配線をスイッチで切り替えられるようにしています。"
+    },
+    {
+      "type": "text",
+      "text": "また、LM723では2番ピン（ILIM端子）と3番ピン（CSEN端子）の間に抵抗器を接続することで、出力する電流の制限することができます。具体的には、この端子間の電位差（つまりここに接続した抵抗器の抵抗値×出力電流）が0.7Vに近づくと出力電圧を下げるように制御する仕組みになっています。たとえば2Ωの抵抗器を接続した場合、出力電流が350mAに達したところでこの部分の電圧が0.7Vになるので、それ以上の電流を流そうとすると出力電圧が低下するようになります。"
+    },
+    {
+      "type": "text",
+      "text": "今回はここに抵抗器ではなくPTCを接続しています。PTCは出力端子の直前に入れることが多いのですが、小容量のPTCは抵抗値が大きめなので、そのため出力電圧の低下が発生します。しかし、LM723のILIM端子とCSEN端子の間にPTCを接続することで、LM723はPTCを通ったあとの電圧を監視して出力電圧を制御するようになるため、PTCによる電圧低下を防ぐことができます。"
+    },
+    {
+      "type": "text",
+      "text": "なお、今回使用する絶縁型スイッチングレギュレータの出力電流は最大250mA（12V×0.25A＝3W）なので、実際には出力が250mAを超えたあたりでスイッチングレギュレータ側の出力電圧が低下するはずです。ただ、保険はできれば多いほうが良く、またこの構成であれば出力電圧への影響も小さいのでこのような回路にしています。"
+    },
+    {
+      "type": "text",
+      "text": "こちらのリニアレギュレータの出力にはDCジャックを1つと、動作確認用のLED（およびLED用の抵抗器）を接続しています。"
+    },
+    {
+      "type": "text",
+      "text": "基板の設計と組み立て",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "今回はこの回路を約90mm×54mmの基板に配置しました。2つの電源モジュールと絶縁型スイッチングレギュレータを配置する必要があるため、表面実装部品を多く使用しています。LM723については表面実装タイプの互換品も存在するのですが、万が一破損させた場合に交換しやすいという理由でDIPタイプのものを使用しています。実際に部品を配置して配線した基板は次のようになっています。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 709,
+          "height": 1141,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s1280x1920/071c18af2b402bbfb6bf02b97f87833c21b8c3e5.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 597,
+          "height": 960,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s640x960/e025722020dd8e8be7a12508a863bf0872466bae.png"
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 503,
+          "height": 810,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s540x810/87fbae66e2df61730c74590b6da4724722a7f672.png"
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 466,
+          "height": 750,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s500x750/0a5a3775d68bff549e52039f583ccb0876aacb3d.png"
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 373,
+          "height": 600,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s400x600/9152706aa09afe110fdb7c35dbaed9f4a404c16d.png"
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 249,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s250x400/d028dfc2fc3ebfcad5e89589eea9d5204d68a670.png"
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 100,
+          "height": 161,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s100x200/ba1a08a6574bf29cfff26ec65a38aee288d1c3c7.png"
+        },
+        {
+          "media_key": "1261bb82efaba9e3a68f9cf55bb525fc:abf76e18b89bb71f-f6",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/1261bb82efaba9e3a68f9cf55bb525fc/abf76e18b89bb71f-f6/s75x75_c1/29236ac48f3ebc036bbf91d88cf1bcefd435cfe6.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "030205",
+        "c1": "040307",
+        "c2": "163780",
+        "c3": "020407",
+        "c4": "640708"
+      }
+    },
+    {
+      "type": "text",
+      "text": "こちらの基板を組み立てると次のようになります。表面にはキットや絶縁型スイッチングレギュレータ、LM723などのスルーホール部品、出力ジャックを配置しています。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 2048,
+          "height": 2048,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s2048x3072/d1a48c5d42d1d6cc73eccb7f30fc09d83e81e06e.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 1280,
+          "height": 1280,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s1280x1920/0065697f67fddbb7f1389036b2d8c1a1a69fbefa.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 640,
+          "height": 640,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s640x960/6e0a9f51626f9d65072183ce5f2600e669ed630c.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 540,
+          "height": 540,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s540x810/5a6673363607fe60caaf2639d28d50b483261775.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 500,
+          "height": 500,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s500x750/02559eeb9bc40328bf2603f239593f15455d32e1.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 400,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s400x600/d3e1a6b02c8f0c032a5712374ab223077195a2dd.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 250,
+          "height": 250,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s250x400/5e1025149188ace71426a08ba8ffe091211c2b8b.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 100,
+          "height": 100,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s100x200/acff293a36c17534587fb634e487e7b458f71c63.jpg"
+        },
+        {
+          "media_key": "dc7503782060f60c8f297f215f53b0a2:abf76e18b89bb71f-27",
+          "type": "image/jpeg",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/dc7503782060f60c8f297f215f53b0a2/abf76e18b89bb71f-27/s75x75_c1/8776fb7c0a35984f1684298d1ab2c10ce5b67b14.jpg",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "503b23",
+        "c1": "071912",
+        "c2": "824f23",
+        "c3": "401f0a",
+        "c4": "929f9c"
+      },
+      "exif": {
+        "Time": 1782090998,
+        "FocalLength": 5,
+        "FocalLength35mmEquiv": 5,
+        "Aperture": 1.6,
+        "ExposureTime": 0.030303030303030304,
+        "ISO": 500,
+        "CameraMake": "Apple",
+        "CameraModel": "iPhone 13 mini",
+        "Lens": "5mm"
+      }
+    },
+    {
+      "type": "text",
+      "text": "裏面にはUSB Type-Cコネクタや表面実装を配置しています。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 2048,
+          "height": 2048,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s2048x3072/992ff241a68e779c48264ae545358cb2e56663df.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 1280,
+          "height": 1280,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s1280x1920/b9963e526f673dab1fe62a35659a81370d00da07.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 640,
+          "height": 640,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s640x960/cd64a300091b86d9b5c3cb48a349058385319dc0.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 540,
+          "height": 540,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s540x810/6ad3cbdc2c3b8ee52e7ba2046538fd495da351ba.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 500,
+          "height": 500,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s500x750/48fe504ade6969ca70f1fb0263d5f120b438d39b.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 400,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s400x600/2c3fdd8e8f9392d197e72ee09afa88641fb1bda3.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 250,
+          "height": 250,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s250x400/2e26a5d511ce956f1fa0989277f8ebda83e82a4f.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 100,
+          "height": 100,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s100x200/3eb661a22b413f078a3f009eb0431e4fd3ae6d58.jpg"
+        },
+        {
+          "media_key": "3495d8384fd1210cbb1a2ba4b83988e4:abf76e18b89bb71f-15",
+          "type": "image/jpeg",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/3495d8384fd1210cbb1a2ba4b83988e4/abf76e18b89bb71f-15/s75x75_c1/a02cb6c967f6081a6f86f6de72cbf15b1546579a.jpg",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "0e0a07",
+        "c1": "5b4929",
+        "c2": "3c250e",
+        "c3": "45371d",
+        "c4": "bda282"
+      },
+      "exif": {
+        "Time": 1782091006,
+        "FocalLength": 5,
+        "FocalLength35mmEquiv": 5,
+        "Aperture": 1.6,
+        "ExposureTime": 0.030303030303030304,
+        "ISO": 500,
+        "CameraMake": "Apple",
+        "CameraModel": "iPhone 13 mini",
+        "Lens": "5mm"
+      }
+    },
+    {
+      "type": "text",
+      "text": "ちなみに基板の端が白っぽくなっているのは白いマスキングテープを貼っているためです（ケース内の基板をはめる溝よりも基板がわずかに小さかったため、テープを貼って隙間を埋めている）。"
+    },
+    {
+      "type": "text",
+      "text": "ケースについて",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "今回は安価なアルミケースを使用しました。アルミなので穴開けは難しくないのですが、端子やスイッチ用に長方形の穴を開ける必要があるため、サイドパネルは基板として発注しました。一般的な1.6mm厚の基板であれば強度としても十分ですし、精度も高いです。"
+    },
+    {
+      "type": "text",
+      "text": "こちらはFreeCADで設計したものをDXF形式で出力し、それをKiCADのEdge.Cutsレイヤーに図形として取り込むことで外形を設計しました。また、文字や枠についてはAffinity Designerで作成し、同様にDXF形式で出力したものをF.Silkscreenレイヤーに図形として取り込んでいます。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 1797,
+          "height": 1282,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s2048x3072/1f5e1cf49af597f253d7f44c1d1e2ac99347fb8a.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 1280,
+          "height": 913,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s1280x1920/6a0f7912490a69ac79de7ddc8b4960c0ab4a262e.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 640,
+          "height": 457,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s640x960/4a5885cd64367684f2193b1ac0b169e179dd6188.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 540,
+          "height": 385,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s540x810/41591f03b4f59971998418b7e5bc57f8ca675b95.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 500,
+          "height": 357,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s500x750/e928b6861686894ce57fd7df88d08900b88988fd.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 400,
+          "height": 285,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s400x600/93274dc83ec8c49e65a81aeb7768becb547882c8.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 250,
+          "height": 178,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s250x400/58e19fea4564bcd624cc9bbfb0167281c8a5f105.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 100,
+          "height": 71,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s100x200/3f7d9e7741f87f87bdd731be5fdfb842ddd747a6.png"
+        },
+        {
+          "media_key": "aa6c43e197c9cd150f24bd16c9f28253:abf76e18b89bb71f-f3",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/aa6c43e197c9cd150f24bd16c9f28253/abf76e18b89bb71f-f3/s75x75_c1/d5cbbfa8dcc53689056ae62bc15758a2db8fcf56.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "000104",
+        "c1": "ececec",
+        "c2": "b3b2b2",
+        "c3": "2f353f",
+        "c4": "0f54bb"
+      }
+    },
+    {
+      "type": "text",
+      "text": "ケースに基板を納めてパネルを取り付けると、次のようになります。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 2048,
+          "height": 2048,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s2048x3072/7cb23d32d2298fa4eb703e4925a787b6f7f4673c.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 1280,
+          "height": 1280,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s1280x1920/12d65654b688176f24ce7da19883231fdaafae65.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 640,
+          "height": 640,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s640x960/157b07f0d2ab38c916294298d96139e287ff9e93.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 540,
+          "height": 540,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s540x810/68595558bb4c36db2953d98e20546afaf34cca71.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 500,
+          "height": 500,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s500x750/9de0f2e13735934f79912a110b39e57ae60ded73.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 400,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s400x600/aa0ddcc61e6ab69a8caefa2e7f76588c8333f49d.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 250,
+          "height": 250,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s250x400/2a72229ddb7bb2dd74a615dada3088e264d98a50.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 100,
+          "height": 100,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s100x200/ad7d79e88e503e6e7bedfb736991dbacf68f54b4.jpg"
+        },
+        {
+          "media_key": "5c4a437f15cfd40167adc69f5bce99e8:abf76e18b89bb71f-68",
+          "type": "image/jpeg",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/5c4a437f15cfd40167adc69f5bce99e8/abf76e18b89bb71f-68/s75x75_c1/8a1592835ab52099fed0038f1a829039f89031b5.jpg",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "3f220b",
+        "c1": "836436",
+        "c2": "2b1806",
+        "c3": "010101",
+        "c4": "837b61"
+      },
+      "exif": {
+        "Time": 1782004454,
+        "FocalLength": 5,
+        "FocalLength35mmEquiv": 5,
+        "Aperture": 1.6,
+        "ExposureTime": 0.030303030303030304,
+        "ISO": 500,
+        "CameraMake": "Apple",
+        "CameraModel": "iPhone 13 mini",
+        "Lens": "5mm"
+      }
+    },
+    {
+      "type": "text",
+      "text": "サイズとしてはBOSSのエフェクターと比べて2周りほど小さい感じです。これとUSB PD充電器を合わせても、体積的にはBOSSのエフェクターよりも小さいですね。"
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 2048,
+          "height": 2048,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s2048x3072/653da88288fbe79143ffc4d119ffa427717f3b1a.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 1280,
+          "height": 1280,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s1280x1920/6ebee4eac0e373c32e341424225c5dc450964ea7.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 640,
+          "height": 640,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s640x960/0740b4cd5774aae55d6be76fa104315273260dc3.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 540,
+          "height": 540,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s540x810/20b1fc9187774f61263b9e8778f29f1ea7843df1.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 500,
+          "height": 500,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s500x750/8eac731618c8e67ddecf37ba6f82f505dab4bfbd.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 400,
+          "height": 400,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s400x600/30061efb9e7bdc61f76193b18756d67b5f7005e0.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 250,
+          "height": 250,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s250x400/3d6a280682a9205a51dab2aa524bfb864317b151.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 100,
+          "height": 100,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s100x200/3d31e8cfcbaa6d46630eaf56fe7ab98032b2d3f8.jpg"
+        },
+        {
+          "media_key": "028fa664c8e01fcc647c17bf8040bca5:abf76e18b89bb71f-85",
+          "type": "image/jpeg",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/028fa664c8e01fcc647c17bf8040bca5/abf76e18b89bb71f-85/s75x75_c1/a9eec28f50228c02871b08a10b68afe179bc4d81.jpg",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "946e51",
+        "c1": "000001",
+        "c2": "9a907e",
+        "c3": "554339",
+        "c4": "d33d0f"
+      },
+      "exif": {
+        "Time": 1782093299,
+        "FocalLength": 5,
+        "FocalLength35mmEquiv": 5,
+        "Aperture": 1.6,
+        "ExposureTime": 0.030303030303030304,
+        "ISO": 640,
+        "CameraMake": "Apple",
+        "CameraModel": "iPhone 13 mini",
+        "Lens": "5mm"
+      }
+    },
+    {
+      "type": "text",
+      "text": "電圧の設定",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "今回使用している電源キットは両方とも出力電圧をユーザー側で設定できるようになっています（詳細はキットの説明書を参照）。リニアレギュレータ側は希望する出力電圧（たとえば9.5V）をそのまま設定し、スイッチングレギュレータはそれよりも1V程度高い電圧に設定します。スイッチングレギュレータのほうは半固定抵抗で出力電圧を設定しますが、目盛りなどがあるわけではないので、出力端子の電圧をテスター等で測定しながら半固定抵抗を回していきます。"
+    },
+    {
+      "type": "text",
+      "text": "出力ノイズの測定",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "最後に、出力に含まれるノイズを簡易的に測定したものと、無負荷時の電圧、負荷を接続した場合の電圧について測定した結果をまとめておきます。"
+    },
+    {
+      "type": "text",
+      "text": "ノイズの測定は、以前「パワーサプライのノイズを測定する」記事で紹介したものと同じ方法・設定で行いました。こちらの記事とまったく同じ条件で、出力電流はおよそ90mAです。"
+    },
+    {
+      "type": "link",
+      "url": "https://b.meso.tokyo/post/810990358068707328/power-supply-noise-measurement",
+      "display_url": "https://b.meso.tokyo/post/810990358068707328/power-supply-noise-measurement",
+      "title": "パワーサプライのノイズを測定する",
+      "description": "パワーサプライのノイズについて測定してみた話です。後半はほぼMaxパッチの[plot]オブジェクトの話です。\n最近コンパクトエフェクター用のパワーサプライを自作しようと試行錯誤しているのですが、コンパクトエフェクター用パワーサプライにおいてはノイズの少なさが求められます。特に古い",
+      "site_name": "Tumblr",
+      "poster": [
+        {
+          "media_key": "71096793328faa842adf847f067b5ba5:abf76e18b89bb71f-ed",
+          "type": "image/png",
+          "width": 2262,
+          "height": 1656,
+          "url": "https://64.media.tumblr.com/71096793328faa842adf847f067b5ba5/abf76e18b89bb71f-ed/s540x810/dedbf04f145812f6a718a82608722da24c2d513f.png"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "USB PD充電器の違いによって出力が変化するかどうかを調べるため、前述の秋月電子通商で販売されているUSB PD充電器と、スマートフォン充電向けの小型USB PD充電器（ラスタバナナ calon 20W）の2種類の充電器を使ってそれぞれの結果を測定しました。それぞれの結果は次のようになりました。",
+      "formatting": [
+        {
+          "type": "link",
+          "start": 86,
+          "end": 102,
+          "url": "https://www.yodobashi.com/product/100000001008890697/"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "秋月電子通商PD充電器＋非アイソレート側（キット使用側、最大1.2A）：",
+      "formatting": [
+        {
+          "type": "bold",
+          "start": 0,
+          "end": 36
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 2048,
+          "height": 1030,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s2048x3072/15e3a5154788506c92d7e825219d404b36c290fb.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 1280,
+          "height": 644,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s1280x1920/62bb4dc747fc546e9acb537dc8dcbecb0f9d19b7.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 640,
+          "height": 322,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s640x960/4d63e17768e3cfc657d1e7f5c1656f679941d0ca.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 540,
+          "height": 272,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s540x810/021bdd5db52d69fd414b38e0c5b868422c145523.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 500,
+          "height": 252,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s500x750/d731d6abb70ab9c4d6c8c309a72e30e2f1ff72ef.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 400,
+          "height": 201,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s400x600/934af74774584d7f0e2249ac34f4361da91db293.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 250,
+          "height": 126,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s250x400/6a54c94339ed879fbbb97940368df8e366b0aceb.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 100,
+          "height": 50,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s100x200/eebe74eae3e0ee4e7a8db60316e6b1372ae09a9d.png"
+        },
+        {
+          "media_key": "166bcaf06d2caded6cbc0419b02a7620:abf76e18b89bb71f-ab",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/166bcaf06d2caded6cbc0419b02a7620/abf76e18b89bb71f-ab/s75x75_c1/54966b3d8d13c00d233ce901349e62ba9f35df24.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "f6f6f6",
+        "c1": "0e1013",
+        "c2": "9c9cd1",
+        "c3": "555351",
+        "c4": "282828"
+      }
+    },
+    {
+      "type": "text",
+      "text": "秋月電子通商PD充電器＋アイソレート側（最大250mA）：",
+      "formatting": [
+        {
+          "type": "bold",
+          "start": 0,
+          "end": 29
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 2048,
+          "height": 1030,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s2048x3072/58fe1a532bd4c431f2a48a28ec9571dafeac57d3.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 1280,
+          "height": 644,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s1280x1920/dd8ebb4906d5135d41868c41ddaa8152f1fe8106.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 640,
+          "height": 322,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s640x960/44dfaf8b8e2e3cf195b5e61978d523b7c8fe8c4d.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 540,
+          "height": 272,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s540x810/43a07af47e0dbaf551abf831312ddb3ec6184bd8.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 500,
+          "height": 252,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s500x750/93ae77f592dcd536af5ad74c569180becfd684fb.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 400,
+          "height": 201,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s400x600/47ed7a4c7bf565658aa09da15af231bda6183c3b.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 250,
+          "height": 126,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s250x400/ff398b099e96526611a07b3d73d7855a6c2db96a.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 100,
+          "height": 50,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s100x200/657e6530b041315cd99c11757346d68e0cc985ec.png"
+        },
+        {
+          "media_key": "932b385ba72b74f2a3d83cb4591228ef:abf76e18b89bb71f-2c",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/932b385ba72b74f2a3d83cb4591228ef/abf76e18b89bb71f-2c/s75x75_c1/1dd267826df9075939a3935e112974f07f0320ab.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "f6f6f6",
+        "c1": "0d0d0d",
+        "c2": "a4a4a4",
+        "c3": "4d4d4d",
+        "c4": "2f74c1"
+      }
+    },
+    {
+      "type": "text",
+      "text": "スマートフォン向けPD充電器＋非アイソレート側（キット使用側、最大1.2A）：",
+      "formatting": [
+        {
+          "type": "bold",
+          "start": 0,
+          "end": 38
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 2048,
+          "height": 1030,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s2048x3072/629861d005e9dd200281f110b8d666be20ab035e.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 1280,
+          "height": 644,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s1280x1920/ab490641d02d4c9ea260968ba4efedd2a8736914.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 640,
+          "height": 322,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s640x960/69da26dfdc8168d245e440ad68731d1128bdf474.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 540,
+          "height": 272,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s540x810/98354ddd8094c7e9953c189ad244313c135ec2ee.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 500,
+          "height": 252,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s500x750/1e39d1feeade6d7e58f79a7d2feea3a0fa4beec8.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 400,
+          "height": 201,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s400x600/b960ffd587faef34b04cde25f01dc5d63e4173ac.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 250,
+          "height": 126,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s250x400/2efd0b695c5a58a4343db885451284062e595ae2.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 100,
+          "height": 50,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s100x200/0b276e3bc73f49adb137b3f2b6c980d35a9e47e5.png"
+        },
+        {
+          "media_key": "050504a89581ee88bc65665cc5ccd355:abf76e18b89bb71f-76",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/050504a89581ee88bc65665cc5ccd355/abf76e18b89bb71f-76/s75x75_c1/f2b8554f50590db7cd96ff490caf05274a7a649b.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "f4f4f4",
+        "c1": "555351",
+        "c2": "c2c2c2",
+        "c3": "347fd4",
+        "c4": "023baf"
+      }
+    },
+    {
+      "type": "text",
+      "text": "スマートフォン向けPD充電器＋アイソレート側（最大250mA）：",
+      "formatting": [
+        {
+          "type": "bold",
+          "start": 0,
+          "end": 31
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 2048,
+          "height": 1030,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s2048x3072/b9062a5baa221dfc1d85c9a7e8e3f7a12f327df7.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 1280,
+          "height": 644,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s1280x1920/bc49ab7e91fe7b58b16ef6165522902c7251d50d.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 640,
+          "height": 322,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s640x960/ad08e91d54315520fef5d4b2232c1d129e1a3ae5.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 540,
+          "height": 272,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s540x810/16bb2e0e43dc31e62660c8667a271b7daa63598b.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 500,
+          "height": 252,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s500x750/aae21389e6558f99ac5c5edceee6e308b8206df4.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 400,
+          "height": 201,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s400x600/afea41763aba766ec4b6e9fea363dfdba98daf7e.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 250,
+          "height": 126,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s250x400/60c7ab2e9095e642af2ccd55c7681d7ac08ed4bd.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 100,
+          "height": 50,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s100x200/5cbb011a26920307e831a29c1b837ed5a6f9d99f.png"
+        },
+        {
+          "media_key": "616b560c26615c7fa5f2b6a5b62499a2:abf76e18b89bb71f-0c",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/616b560c26615c7fa5f2b6a5b62499a2/abf76e18b89bb71f-0c/s75x75_c1/3e75e4cfdec6a3c87ffc25cf09663052593f945b.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "f9f9f9",
+        "c1": "232323",
+        "c2": "4d4d4d",
+        "c3": "c1c1c1",
+        "c4": "a5a5a5"
+      }
+    },
+    {
+      "type": "text",
+      "text": "まずキット使用側（最大1.2A側）の出力ですが、100Hzあたりまでは高めで、そこから高域にかけてノイズが小さくなっていくという傾向でした。これは前回記事で測定した乾電池に似た傾向で、ノイズはかなり小さめです。また、アイソレート側の出力については、およそ50Hzあたりと100～200Hzあたりに小さいピークがありますが、それ以外は10kHzあたりまでは全周波数帯でおおむね同レベルのノイズがあり、10kHz以降はややノイズレベルが下がっていく、という傾向でした。いずれも手元にあるほかのパワーサプライと比べて同等以上にノイズの少ない電力を供給できそうです。"
+    },
+    {
+      "type": "text",
+      "text": "また、USB PD充電器を変えるとノイズの傾向もわずかですが変化する結果となりました。大きな違いではないため影響は少ないと思いますが、もしかしたらものすごくノイズが大きいUSB PD充電器、なんてものも存在するのかもしれません。"
+    },
+    {
+      "type": "text",
+      "text": "負荷による出力電圧変化",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "無負荷時の電圧はキット使用側（最大1.2A側）が約9.52V、アイソレート側（最大250mA側）が約9.56/9.29/8.98Vと、おおむね理論値と一致しています。"
+    },
+    {
+      "type": "text",
+      "text": "また、負荷を接続した状態（＝一定の電流を流した状態）での出力電圧も測定しました。こちらは「能動負荷でパワーサプライの電圧と電流を測る」記事で紹介した能動負荷を使用して測定しています。"
+    },
+    {
+      "type": "link",
+      "url": "https://b.meso.tokyo/post/810166735038709760/investigate-power-supply-voltage-and-current",
+      "display_url": "https://b.meso.tokyo/post/810166735038709760/investigate-power-supply-voltage-and-current",
+      "title": "能動負荷でパワーサプライの電圧と電流を測る",
+      "description": "手元にあるエフェクター用パワーサプライについて、電流を多めに流した場合の電圧がどうなるかを調べてみました。\n一般的なエフェクター用パワーサプライは接続する機器によらず一定の電圧（おおむね9V前後）を出力するように設計されています。そして、電流は抵抗と電圧によって決まるので、接続す",
+      "site_name": "Tumblr",
+      "poster": [
+        {
+          "media_key": "a43393a8ac1ff807a57ed9be7fba5b74:abf76e18b89bb71f-1e",
+          "type": "image/jpeg",
+          "width": 3024,
+          "height": 3024,
+          "url": "https://64.media.tumblr.com/a43393a8ac1ff807a57ed9be7fba5b74/abf76e18b89bb71f-1e/s540x810/987f02881e145fb063aa844ea3792bdcaa12f084.jpg"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "測定結果は次のようになりました。"
+    },
+    {
+      "type": "text",
+      "text": "秋月電子通商PD充電器＋非アイソレート側（キット使用側、最大1.2A）：",
+      "formatting": [
+        {
+          "type": "bold",
+          "start": 0,
+          "end": 36
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 1200,
+          "height": 741,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s1280x1920/2c25a9b4c0d4823c0396692010053388951440ea.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 640,
+          "height": 395,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s640x960/cd51cb70c4677b7ddd3c29a3a0df680915a27149.png"
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 540,
+          "height": 333,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s540x810/5fa10fffe87c1be1db910d8ee52d6da31c7659bc.png"
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 500,
+          "height": 309,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s500x750/410991a231ea50083e1588291d3f80ef13c60f79.png"
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 400,
+          "height": 247,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s400x600/067b03d53093a240b85a59c356532a821a674ac9.png"
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 250,
+          "height": 154,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s250x400/de298441d1e287679441f9370aa46a506c18c7b1.png"
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 100,
+          "height": 62,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s100x200/3c14681e1de13859851add1952e7f4947007c2e1.png"
+        },
+        {
+          "media_key": "5e590a041c2b75e04e298665b9881aaa:abf76e18b89bb71f-13",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/5e590a041c2b75e04e298665b9881aaa/abf76e18b89bb71f-13/s75x75_c1/84eaf9c64fb18dadaf4cf617c19115b247433afa.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "ffffff",
+        "c1": "f9f9f9",
+        "c2": "f5f5f5",
+        "c3": "a5c0f0",
+        "c4": "b9b9b9"
+      }
+    },
+    {
+      "type": "text",
+      "text": "秋月電子通商PD充電器＋アイソレート側（最大250mA）：",
+      "formatting": [
+        {
+          "type": "bold",
+          "start": 0,
+          "end": 29
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "media": [
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 1200,
+          "height": 741,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s1280x1920/b781da8688afb99a354bb10754729e736643eb30.png",
+          "has_original_dimensions": true
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 640,
+          "height": 395,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s640x960/428a64e3fcfe6eb985532d08d03fe7c0ed57597d.png"
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 540,
+          "height": 333,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s540x810/504b6641284e3c203d1cf09aa2302af9af3e8e59.png"
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 500,
+          "height": 309,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s500x750/5080c11ecbe2ba4e27354930700a9138c26e7fc2.png"
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 400,
+          "height": 247,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s400x600/a0485bf8e8614a3ef3742886e0ad31b930e6e6ef.png"
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 250,
+          "height": 154,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s250x400/b0d1db7ce200489a74e90ed4c5380e527ff69bf5.png"
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 100,
+          "height": 62,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s100x200/53a4016203d8a35c93126efefeed93b2b8627721.png"
+        },
+        {
+          "media_key": "4cfdee48beea8b28f1aed5f1a58180c5:abf76e18b89bb71f-06",
+          "type": "image/png",
+          "width": 75,
+          "height": 75,
+          "url": "https://64.media.tumblr.com/4cfdee48beea8b28f1aed5f1a58180c5/abf76e18b89bb71f-06/s75x75_c1/0aecd1787558361fde4be8758ac02f0f630114df.png",
+          "cropped": true
+        }
+      ],
+      "colors": {
+        "c0": "ffffff",
+        "c1": "fdfdfd",
+        "c2": "eaeaea",
+        "c3": "d7d7d7",
+        "c4": "a0a0a0"
+      }
+    },
+    {
+      "type": "text",
+      "text": "非アイソレート側は出力電流が0.1A増加すると出力電圧が0.05V低下する、という傾向になりました。非アイソレート側の出力にはPTCを直列に接続しており、このPTCの抵抗値が最大0.3Ωとのことなので、この影響で電圧が低下しているのではないかと考えられます。また、アイソレート側も出力電流が大きくなると電圧も少しずつ下がっていますが、0.25A（250mA）を超えると電圧がより大きく下がる傾向です。これは前述のように絶縁型スイッチングレギュレータの出力が定格250mAなのと、保護回路の影響でしょう。"
+    },
+    {
+      "type": "text",
+      "text": "発熱について",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "非アイソレート側（キット使用側）で1.2Aの電流を出力させた状態で5分放置したあと、放射温度計（非接触で温度を測定できる温度計）でリニアレギュレータICおよびスイッチングレギュレータICの温度を測定したところ、それぞれ75.6℃、67.7℃でした。この程度の温度であれば、特に追加での熱対策は不要でしょう。"
+    },
+    {
+      "type": "text",
+      "text": "実際のエフェクターでの検証",
+      "subtype": "heading2"
+    },
+    {
+      "type": "text",
+      "text": "データとしてはまずまずの結果が得られたので、電源ノイズの影響を受けやすい定番エフェクターであるBOSSのDS-1やデジタルエフェクターを接続して使用してみましたが、やはり電源由来のノイズはほぼ感じられず、快適に利用できました。長時間使ってみた際の変化や経年劣化などはまだ未知数ですが、ひとまずは現場で使えそうなものができたと思います。ただ、USB Type-CケーブルによってはUSB Type-Cコネクタの接触が緩いものがあるので、その点には注意が必要そうです。"
+    }
+  ],
+  "layout": [
+    {
+      "type": "rows",
+      "display": [
+        {
+          "blocks": [
+            0
+          ]
+        },
+        {
+          "blocks": [
+            1
+          ]
+        },
+        {
+          "blocks": [
+            2
+          ]
+        },
+        {
+          "blocks": [
+            3
+          ]
+        },
+        {
+          "blocks": [
+            4
+          ]
+        },
+        {
+          "blocks": [
+            5
+          ]
+        },
+        {
+          "blocks": [
+            6
+          ]
+        },
+        {
+          "blocks": [
+            7
+          ]
+        },
+        {
+          "blocks": [
+            8
+          ]
+        },
+        {
+          "blocks": [
+            9
+          ]
+        },
+        {
+          "blocks": [
+            10
+          ]
+        },
+        {
+          "blocks": [
+            11
+          ]
+        },
+        {
+          "blocks": [
+            12
+          ]
+        },
+        {
+          "blocks": [
+            13
+          ]
+        },
+        {
+          "blocks": [
+            14
+          ]
+        },
+        {
+          "blocks": [
+            15
+          ]
+        },
+        {
+          "blocks": [
+            16
+          ]
+        },
+        {
+          "blocks": [
+            17
+          ]
+        },
+        {
+          "blocks": [
+            18
+          ]
+        },
+        {
+          "blocks": [
+            19
+          ]
+        },
+        {
+          "blocks": [
+            20
+          ]
+        },
+        {
+          "blocks": [
+            21
+          ]
+        },
+        {
+          "blocks": [
+            22
+          ]
+        },
+        {
+          "blocks": [
+            23
+          ]
+        },
+        {
+          "blocks": [
+            24
+          ]
+        },
+        {
+          "blocks": [
+            25
+          ]
+        },
+        {
+          "blocks": [
+            26
+          ]
+        },
+        {
+          "blocks": [
+            27
+          ]
+        },
+        {
+          "blocks": [
+            28
+          ]
+        },
+        {
+          "blocks": [
+            29
+          ]
+        },
+        {
+          "blocks": [
+            30
+          ]
+        },
+        {
+          "blocks": [
+            31
+          ]
+        },
+        {
+          "blocks": [
+            32
+          ]
+        },
+        {
+          "blocks": [
+            33
+          ]
+        },
+        {
+          "blocks": [
+            34
+          ]
+        },
+        {
+          "blocks": [
+            35
+          ]
+        },
+        {
+          "blocks": [
+            36
+          ]
+        },
+        {
+          "blocks": [
+            37
+          ]
+        },
+        {
+          "blocks": [
+            38
+          ]
+        },
+        {
+          "blocks": [
+            39
+          ]
+        },
+        {
+          "blocks": [
+            40
+          ]
+        },
+        {
+          "blocks": [
+            41
+          ]
+        },
+        {
+          "blocks": [
+            42
+          ]
+        },
+        {
+          "blocks": [
+            43
+          ]
+        },
+        {
+          "blocks": [
+            44
+          ]
+        },
+        {
+          "blocks": [
+            45
+          ]
+        },
+        {
+          "blocks": [
+            46
+          ]
+        },
+        {
+          "blocks": [
+            47
+          ]
+        },
+        {
+          "blocks": [
+            48
+          ]
+        },
+        {
+          "blocks": [
+            49
+          ]
+        },
+        {
+          "blocks": [
+            50
+          ]
+        },
+        {
+          "blocks": [
+            51
+          ]
+        },
+        {
+          "blocks": [
+            52
+          ]
+        },
+        {
+          "blocks": [
+            53
+          ]
+        },
+        {
+          "blocks": [
+            54
+          ]
+        },
+        {
+          "blocks": [
+            55
+          ]
+        },
+        {
+          "blocks": [
+            56
+          ]
+        },
+        {
+          "blocks": [
+            57
+          ]
+        },
+        {
+          "blocks": [
+            58
+          ]
+        },
+        {
+          "blocks": [
+            59
+          ]
+        },
+        {
+          "blocks": [
+            60
+          ]
+        },
+        {
+          "blocks": [
+            61
+          ]
+        },
+        {
+          "blocks": [
+            62
+          ]
+        },
+        {
+          "blocks": [
+            63
+          ]
+        },
+        {
+          "blocks": [
+            64
+          ]
+        },
+        {
+          "blocks": [
+            65
+          ]
+        },
+        {
+          "blocks": [
+            66
+          ]
+        },
+        {
+          "blocks": [
+            67
+          ]
+        },
+        {
+          "blocks": [
+            68
+          ]
+        },
+        {
+          "blocks": [
+            69
+          ]
+        },
+        {
+          "blocks": [
+            70
+          ]
+        },
+        {
+          "blocks": [
+            71
+          ]
+        },
+        {
+          "blocks": [
+            72
+          ]
+        },
+        {
+          "blocks": [
+            73
+          ]
+        },
+        {
+          "blocks": [
+            74
+          ]
+        },
+        {
+          "blocks": [
+            75
+          ]
+        },
+        {
+          "blocks": [
+            76
+          ]
+        },
+        {
+          "blocks": [
+            77
+          ]
+        },
+        {
+          "blocks": [
+            78
+          ]
+        },
+        {
+          "blocks": [
+            79
+          ]
+        },
+        {
+          "blocks": [
+            80
+          ]
+        },
+        {
+          "blocks": [
+            81
+          ]
+        },
+        {
+          "blocks": [
+            82
+          ]
+        },
+        {
+          "blocks": [
+            83
+          ]
+        },
+        {
+          "blocks": [
+            84
+          ]
+        },
+        {
+          "blocks": [
+            85
+          ]
+        },
+        {
+          "blocks": [
+            86
+          ]
+        },
+        {
+          "blocks": [
+            87
+          ]
+        },
+        {
+          "blocks": [
+            88
+          ]
+        },
+        {
+          "blocks": [
+            89
+          ]
+        },
+        {
+          "blocks": [
+            90
+          ]
+        },
+        {
+          "blocks": [
+            91
+          ]
+        },
+        {
+          "blocks": [
+            92
+          ]
+        },
+        {
+          "blocks": [
+            93
+          ]
+        },
+        {
+          "blocks": [
+            94
+          ]
+        },
+        {
+          "blocks": [
+            95
+          ]
+        },
+        {
+          "blocks": [
+            96
+          ]
+        },
+        {
+          "blocks": [
+            97
+          ]
+        },
+        {
+          "blocks": [
+            98
+          ]
+        },
+        {
+          "blocks": [
+            99
+          ]
+        },
+        {
+          "blocks": [
+            100
+          ]
+        },
+        {
+          "blocks": [
+            101
+          ]
+        },
+        {
+          "blocks": [
+            102
+          ]
+        },
+        {
+          "blocks": [
+            103
+          ]
+        },
+        {
+          "blocks": [
+            104
+          ]
+        },
+        {
+          "blocks": [
+            105
+          ]
+        },
+        {
+          "blocks": [
+            106
+          ]
+        },
+        {
+          "blocks": [
+            107
+          ]
+        },
+        {
+          "blocks": [
+            108
+          ]
+        }
+      ],
+      "truncate_after": 2
+    }
+  ]
+}
