@@ -16,6 +16,7 @@ sys.path.append(os.path.abspath(os.path.join("depends", "tyconf", "src")))
 
 import livereload
 from tyconf import TomlWriter
+from tyconf.tyconf import ParseError
 from untlr.server import ServerApp
 from untlr.renderer import pre_render
 from untlr.config import UntlrConfig
@@ -93,11 +94,11 @@ def render(config: dict[str, Any], output_path):
 def main():
     parser = get_parser()
     args = parser.parse_args(namespace=Arguments())
+    config = UntlrConfig()
 
     if args.config_skelton:
         writer = TomlWriter()
-        conf = UntlrConfig()
-        writer.dump(sys.stdout, conf)
+        writer.dump(sys.stdout, config)
         sys.exit(0)
     
     if args.debug:
@@ -105,10 +106,10 @@ def main():
 
     # load config file
     try:
-        with open(args.config, "rb") as fp:
-            config = tomllib.load(fp)
-    except IOError:
-        print("config file does not exist", file=sys.stderr)
+        config.parse_file(str(args.config))
+    except ParseError:
+        msg = "Config file is not found. \nYou can generate it by `untlr_server.py --config-skelton > config.toml` command."
+        print(msg, file=sys.stderr)
         sys.exit(-1)
 
     if not args.debug:
@@ -131,7 +132,7 @@ def main():
 
     if (not "theme_file" in config
         and not "theme_dir" in config):
-        logger.critical("theme file or directory not given or invalid file or directory is given")
+        logger.critical("theme file or directory not given, or invalid file or directory is given")
         sys.exit(-1)
 
     if args.render:
