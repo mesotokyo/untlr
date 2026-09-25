@@ -59,6 +59,7 @@ class APIConfig(TyConf):
         self.add_key("host", str, default="https://api.tumblr.com",
                      help="Tumblr API endpoint")
         self.add_key("key", str, example="abcdefg123456...",
+                     required=True,
                      help="Tumblr API key")
 
 
