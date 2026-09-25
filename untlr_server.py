@@ -31,6 +31,7 @@ class Arguments(argparse.Namespace):
     theme_file: Path | None
     config: Path
     debug: bool
+    config_skelton: bool
 
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="render theme file")
@@ -49,6 +50,8 @@ def get_parser() -> argparse.ArgumentParser:
                         metavar="OUTPUT_FILE",
                         type=Path,
                         default=None)
+    parser.add_argument("--config-skelton",
+                        action="store_true")
     return parser
 
 def check_excluded(filename: str, excludes: list[re.Pattern]) -> bool:
@@ -90,6 +93,12 @@ def render(config: dict[str, Any], output_path):
 def main():
     parser = get_parser()
     args = parser.parse_args(namespace=Arguments())
+
+    if args.config_skelton:
+        writer = TomlWriter()
+        conf = UntlrConfig()
+        writer.dump(sys.stdout, conf)
+        sys.exit(0)
     
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
