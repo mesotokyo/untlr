@@ -72,6 +72,12 @@ You can view the rendered content by accessing `http://localhost:8080/` in your 
 
 ## Functional limitations
 
+### Supported page types
+
+Currently `untlr_server.py` can render `index`, `page` and `post` type pages. Other type pages such as `archive` are currently not supported.
+
+### About themes and contents
+
 As it stands, `untlr_server.py` does not guarantee that all themes and content will be rendered exactly as provided by the Tumblr. The reasons are as follows:
 
  - As far as I checked, some of the officially provided theme files appear to use directives that are not publicly documented.
@@ -104,7 +110,7 @@ For more information about `Jinja2`, see [Jinja2 documentation](https://jinja.pa
 
 ### `include_sass` directive for `Jinja2` template
 
-For pre-rendering process, `untlr_server.py` provides a special directive): `{% include_sass <filename> %}`.
+For pre-rendering process, `untlr_server.py` provides a special directive: `{% include_sass <filename> %}`.
 
 This directive load a given `Sass` format file, then convert it to CSS, and renders the result into the theme.
 
